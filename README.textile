@@ -1,0 +1,8 @@
+h2. de_DE.php
+
+h3. Deutsch
+mehr Information bei Heiko "http://www.code-styling.de/deutsch/permalinks-mit-umlauten-ohne-o42-clean-umlauts":http://www.code-styling.de/deutsch/permalinks-mit-umlauten-ohne-o42-clean-umlauts
+oder auf "http://wordpress-buch.bueltge.de/das-wordpress-buch/downloads/extra/":http://wordpress-buch.bueltge.de/das-wordpress-buch/downloads/extra/
+
+h3. English
+special german permalink sanitize and replaces characters with appropriate transliterations uploads will be only needed at admin center and xmlrpc calls, pre-select also the german spell checker at TinyMCE
