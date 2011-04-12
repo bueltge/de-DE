@@ -1,7 +1,7 @@
 <?php
 /*
- * @version 0.7.1
- * @date 25.02.2011 21:56:06
+ * @version 0.7.2
+ * @date 12.04.2011 21:26:06
  * suggestion by Heiko Rabe (www.code-styling.de ), Frank Bueltge (bueltge.de ), Thomas Scholz (toscho.de )
  * special german permalink sanitize will be only needed at admin center and xmlrpc calls
  * avoid additional filtering at frontend html generation
@@ -40,6 +40,7 @@ if ( is_admin() || ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) ) {
 		$title = str_replace( $umlaut_chars['ecto'], $umlaut_chars['perma'], $title );
 		$title = str_replace( $umlaut_chars['in'], $umlaut_chars['perma'], $title );
 		$title = str_replace( $umlaut_chars['html'], $umlaut_chars['perma'], $title );
+		$title = remove_accents( $title );
 		$title = sanitize_title_with_dashes( $title );
 		$title = str_replace( '.', '-', $title );
 		
