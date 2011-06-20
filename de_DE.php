@@ -1,6 +1,6 @@
 <?php
 /*
- * @version 0.7.1
+ * @version 0.7.3
  * @date 20.06.2011 22:10:06
  * suggestion by Heiko Rabe (www.code-styling.de ), Frank Bueltge (bueltge.de ), Thomas Scholz (toscho.de )
  * special german permalink sanitize will be only needed at admin center and xmlrpc calls
@@ -40,6 +40,7 @@ if ( is_admin() || ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) ) {
 		$title = str_replace( $umlaut_chars['ecto'], $umlaut_chars['perma'], $title );
 		$title = str_replace( $umlaut_chars['in'], $umlaut_chars['perma'], $title );
 		$title = str_replace( $umlaut_chars['html'], $umlaut_chars['perma'], $title );
+		$title = remove_accents( $title );
 		$title = sanitize_title_with_dashes( $title );
 		$title = str_replace( '.', '-', $title );
 		
@@ -145,5 +146,12 @@ if ( is_admin() || ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) ) {
 		return implode( ',',$res);
 	}
 	add_filter( 'mce_spellchecker_languages', 'de_DE_spell_checker_default' );
+	
+	// change rss language to de
+	function de_DE_rss_language() {
+		if ( 'de' !== get_option( 'rss_language' ) )
+			update_option( 'rss_language', 'de' );
+	}
+	add_action( 'admin_init', 'de_DE_rss_language' );
+	
 }
-?>
