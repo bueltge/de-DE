@@ -1,7 +1,7 @@
 <?php
 /*
  * @version 0.7.1
- * @date 25.02.2011 21:56:06
+ * @date 20.06.2011 22:10:06
  * suggestion by Heiko Rabe (www.code-styling.de ), Frank Bueltge (bueltge.de ), Thomas Scholz (toscho.de )
  * special german permalink sanitize will be only needed at admin center and xmlrpc calls
  * avoid additional filtering at frontend html generation
@@ -47,6 +47,9 @@ if ( is_admin() || ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) ) {
 	}
 	
 	function de_DE_replace_filename( $filename ) {
+		// Win Livewriter sends escaped strings
+		$filename = html_entity_decode( $filename, ENT_QUOTES, 'utf-8' );
+		// Strip HTML and PHP tags
 		$filename = strip_tags( $filename );
 		// Preserve escaped octets.
 		$filename = preg_replace( '|%([a-fA-F0-9][a-fA-F0-9])|', '---$1---', $filename );
