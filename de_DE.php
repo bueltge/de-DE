@@ -2,11 +2,29 @@
 /*
  * @version  0.7.4
  * @date     04/26/2012
- * suggestion by Heiko Rabe (www.code-styling.de ), Frank Bueltge (bueltge.de ), Thomas Scholz (toscho.de )
- * special german permalink sanitize will be only needed at admin center and xmlrpc calls
+ * suggestion by Heiko Rabe (www.code-styling.de), Frank Bueltge (bueltge.de), Thomas Scholz (toscho.de)
+ * special german permalink sanitize will be only needed at admin center, xmlrpc calls, ajax and cron
  * avoid additional filtering at frontend html generation
+ * 
+ * 
+ * LICENSE: GPLv3
+ * Copyright 2009 - 2012, Frank Bültge ( frank@bueltge.de )
+ * 
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-
+ 
 // Check for different constant
 // We need it only, ...
 if ( is_admin() // if we are at admin center 
