@@ -4,8 +4,8 @@
 
 Diese Sprach-DropIn ersetzt diverse Zeichen durch entprechende Strings in den Permalinks und den Namen hochgeladener Dateien.
 
-mehr Information bei Heiko "http://www.code-styling.de/deutsch/permalinks-mit-umlauten-ohne-o42-clean-umlauts":http://www.code-styling.de/deutsch/permalinks-mit-umlauten-ohne-o42-clean-umlauts
-oder auf "http://wordpress-buch.bueltge.de/das-wordpress-buch/downloads/extra/":http://wordpress-buch.bueltge.de/das-wordpress-buch/downloads/extra/
+mehr Information bei Heiko [Permalinks mit Umlauten ohne o42-clean-umlauts](http://www.code-styling.de/deutsch/permalinks-mit-umlauten-ohne-o42-clean-umlauts)
+oder auf [Das WordPress-Buch](http://wordpress-buch.bueltge.de/das-wordpress-buch/downloads/extra/)
 
 ### English
 
