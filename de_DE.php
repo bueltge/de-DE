@@ -87,6 +87,9 @@ if ( is_admin() // if we are at admin center
 	 */
 	function de_DE_replace_filename( $filename ) {
 		
+		// Win Livewriter sends escaped strings
+		$filename = html_entity_decode( $filename, ENT_QUOTES, 'utf-8' );
+		// Strip HTML and PHP tags
 		$filename = strip_tags( $filename );
 		// Preserve escaped octets.
 		$filename = preg_replace( '|%([a-fA-F0-9][a-fA-F0-9])|', '---$1---', $filename );
