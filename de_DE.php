@@ -1,7 +1,7 @@
 <?php
 /*
- * @version 0.7.3
- * @date 14.04.2011 10:53:06
+ * @version  0.7.3
+ * @date     04/26/2012
  * suggestion by Heiko Rabe (www.code-styling.de ), Frank Bueltge (bueltge.de ), Thomas Scholz (toscho.de )
  * special german permalink sanitize will be only needed at admin center and xmlrpc calls
  * avoid additional filtering at frontend html generation
@@ -152,4 +152,3 @@ if ( is_admin() || ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) ) {
 	add_action( 'admin_init', 'de_DE_rss_language' );
 	
 }
-?>
