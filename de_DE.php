@@ -7,15 +7,16 @@
  * avoid additional filtering at frontend html generation
  */
 
-/* we need it only, if we are at admin center or processing offline blog software like LiveWriter */
-if ( is_admin()
-	 || ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) 
-	 || ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
-	 || ( defined( 'DOING_AJAX' ) && DOING_AJAX )
-	 || ( defined( 'DOING_CRON' ) && DOING_CRON )
+// Check for different constant
+// We need it only, ...
+if ( is_admin() // if we are at admin center 
+	 || ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) // or processing offline blog software like LiveWriter
+	 || ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) // or doing on autosave 
+	 || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) // or create posts with ajax
+	 || ( defined( 'DOING_CRON' ) && DOING_CRON ) // or doing via cron
 	) {
 	
-	/* define it global */
+	// define it global
 	$umlaut_chars['in']    = array( chr(196), chr(228), chr(214), chr(246), chr(220), chr(252), chr(223) );
 	$umlaut_chars['ecto']  = array( 'Ä', 'ä', 'Ö', 'ö', 'Ü', 'ü', 'ß' );
 	$umlaut_chars['html']  = array( '&Auml;', '&auml;', '&Ouml;', '&ouml;', '&Uuml;', '&uuml;', '&szlig;' );
@@ -26,7 +27,14 @@ if ( is_admin()
 	);
 	$umlaut_chars['perma'] = array( 'Ae', 'ae', 'Oe', 'oe', 'Ue', 'ue', 'ss' );
 	
-	/* sanitizes the titles to get qualified german permalinks with correct transliteration */
+	/**
+	 * Sanitizes the titles to get qualified german permalinks with correct transliteration
+	 * 
+	 * @since   0.0.1
+	 * @param   $title      String
+	 * @param   $raw_title  String
+	 * @return  $title
+	 */
 	function de_DE_umlaut_permalinks( $title, $raw_title = NULL ) {
 		global $umlaut_chars;
 		
@@ -52,7 +60,15 @@ if ( is_admin()
 		return $title;
 	}
 	
+	/**
+	 * Replace filename
+	 * 
+	 * @since   0.6.0
+	 * @param   $filename  String
+	 * @return  $filename  String
+	 */
 	function de_DE_replace_filename( $filename ) {
+		
 		$filename = strip_tags( $filename );
 		// Preserve escaped octets.
 		$filename = preg_replace( '|%([a-fA-F0-9][a-fA-F0-9])|', '---$1---', $filename );
@@ -62,10 +78,13 @@ if ( is_admin()
 		$filename = preg_replace( '|---([a-fA-F0-9][a-fA-F0-9])---|', '%$1', $filename );
 	
 		$filename = remove_accents( $filename );
-		if (seems_utf8( $filename ) ) {
+		
+		if ( seems_utf8( $filename ) ) {
+			
 			if ( function_exists( 'mb_strtolower' ) )
 				$filename = mb_strtolower( $filename, 'UTF-8' );
-			$filename = utf8_uri_encode( $filename, 200);
+			
+			$filename = utf8_uri_encode( $filename, 200 );
 		}
 		
 		$filename = strtolower( $filename );
@@ -77,7 +96,14 @@ if ( is_admin()
 		return $filename;
 	}
 	
-	function de_DE_umlaut_xmlrpc_content( $content) {
+	/**
+	 * Replace umlaut chars
+	 * 
+	 * @since   0.1.0
+	 * @param   $content  String
+	 * @return  $content  String
+	 */
+	function de_DE_umlaut_xmlrpc_content( $content ) {
 		global $umlaut_chars;
 		
 		$content = str_replace( $umlaut_chars['html'], $umlaut_chars['utf8'], $content );
@@ -86,13 +112,24 @@ if ( is_admin()
 		return $content;
 	}
 	
+	/**
+	 * Filter umlaut chars of files
+	 * 
+	 * @since   0.6.0
+	 * @param   $filename  String
+	 * @return  $filename  String
+	 */
 	function de_DE_umlaut_filename( $filename ) {
 		global $umlaut_chars;
 		
 		if ( seems_utf8( $filename ) ) {
 			$invalid_latin_chars = array( 
-				chr(197).chr(146) => 'OE', chr(197).chr(147) => 'oe', chr(197).chr(160) => 'S', 
-				chr(197).chr(189) => 'Z', chr(197).chr(161) => 's', chr(197).chr(190) => 'z', 
+				chr(197).chr(146)          => 'OE',
+				chr(197).chr(147)          => 'oe',
+				chr(197).chr(160)          => 'S', 
+				chr(197).chr(189)          => 'Z',
+				chr(197).chr(161)          => 's',
+				chr(197).chr(190)          => 'z', 
 				chr(226).chr(130).chr(172) => 'E' 
 			);
 			$filename = utf8_decode( strtr( $filename, $invalid_latin_chars) );
@@ -106,24 +143,33 @@ if ( is_admin()
 		return $filename;
 	}
 	
-	/* enable cleaning of permalinks */
+	/**
+	 * Enable cleaning of permalinks
+	 * 
+	 * @since   0.0.1
+	 */
 	remove_filter( 'sanitize_title', 'sanitize_title_with_dashes', 11 );
 	add_filter( 'sanitize_title', 'de_DE_umlaut_permalinks', 10, 2 );
 	
-	/* enable cleaning of filename */
+	/**
+	 * Enable cleaning of filename
+	 * 
+	 * @since   0.0.1
+	 */
 	add_filter( 'sanitize_file_name', 'de_DE_umlaut_filename', 10, 1 );
 	
 	if ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) {
 	
-		// referenced to: feed.php filters (extend it if nessessary)
+		// referenced to: feed.php filters (extend it if necessary)
 		// ---------------------------------------------------------------------------
-		// wp_title_rss | the_title_rss | the_content_rss | the_excerpt_rss | comment_text_rss | the_category_rss | the_permalink_rss
+		// wp_title_rss | the_title_rss | the_content_rss | the_excerpt_rss | 
+		// comment_text_rss | the_category_rss | the_permalink_rss
 		
-		// references to export.php filters extend it if nessessary): 
+		// references to export.php filters extend it if necessary): 
 		// ---------------------------------------------------------------------------
 		// the_content_export | the_excerpt_export
 		
-		//Window Live Writer and others Offline Blogging Tools needs to be corrected to UTF-8
+		// Window Live Writer and others offline blogging Tools needs to be corrected to UTF-8
 		foreach ( 
 			array( 
 				'the_title', 
@@ -138,22 +184,37 @@ if ( is_admin()
 	
 	}
 	
-	//pre-select the german spell checker at TinyMCE
-	function de_DE_spell_checker_default( $langs) {
-		$arr = explode( ',', str_replace( '+','',$langs) );
-		$res = array();
-		foreach( $arr as $lang) {
-			$res[] = ( preg_match( '/=de$/', $lang) ? '+'.$lang : $lang );
-		}
-		return implode( ',',$res);
-	}
 	add_filter( 'mce_spellchecker_languages', 'de_DE_spell_checker_default' );
+	/**
+	 * pre-select the german spell checker at TinyMCE
+	 * 
+	 * @since   0.0.1
+	 * @param   $langs  String
+	 * @return  $res    String
+	 */
+	function de_DE_spell_checker_default( $langs ) {
+		
+		$arr = explode( ',', str_replace( '+', '', $langs ) );
+		$res = array();
+		
+		foreach( $arr as $lang ) {
+			$res[] = ( preg_match( '/=de$/', $lang) ? '+' . $lang : $lang );
+		}
+		
+		return implode( ',', $res );
+	}
 	
-	// change rss language to de
+	add_action( 'admin_init', 'de_DE_rss_language' );
+	/**
+	/* change rss language to de in db-table options
+	 * 
+	 * @since   0.7.0
+	 * @return  void
+	 */
 	function de_DE_rss_language() {
+		
 		if ( 'de' !== get_option( 'rss_language' ) )
 			update_option( 'rss_language', 'de' );
 	}
-	add_action( 'admin_init', 'de_DE_rss_language' );
 	
 }
