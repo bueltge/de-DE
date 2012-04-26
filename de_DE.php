@@ -1,6 +1,6 @@
 <?php
 /*
- * @version  0.7.3
+ * @version  0.7.4
  * @date     04/26/2012
  * suggestion by Heiko Rabe (www.code-styling.de ), Frank Bueltge (bueltge.de ), Thomas Scholz (toscho.de )
  * special german permalink sanitize will be only needed at admin center and xmlrpc calls
@@ -8,7 +8,12 @@
  */
 
 /* we need it only, if we are at admin center or processing offline blog software like LiveWriter */
-if ( is_admin() || ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) ) {
+if ( is_admin()
+	 || ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) 
+	 || ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+	 || ( defined( 'DOING_AJAX' ) && DOING_AJAX )
+	 || ( defined( 'DOING_CRON' ) && DOING_CRON )
+	) {
 	
 	/* define it global */
 	$umlaut_chars['in']    = array( chr(196), chr(228), chr(214), chr(246), chr(220), chr(252), chr(223) );
