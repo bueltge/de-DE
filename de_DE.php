@@ -35,15 +35,15 @@ if ( is_admin() // if we are at admin center
 	) {
 	
 	// define it global
-	$umlaut_chars['in']    = array( chr(196), chr(228), chr(214), chr(246), chr(220), chr(252), chr(223) );
-	$umlaut_chars['ecto']  = array( 'Ä', 'ä', 'Ö', 'ö', 'Ü', 'ü', 'ß' );
-	$umlaut_chars['html']  = array( '&Auml;', '&auml;', '&Ouml;', '&ouml;', '&Uuml;', '&uuml;', '&szlig;' );
-	$umlaut_chars['feed']  = array( '&#196;', '&#228;', '&#214;', '&#246;', '&#220;', '&#252;', '&#223;' );
+	$umlaut_chars['in']    = array( chr(196), chr(228), chr(214), chr(246), chr(220), chr(252), chr(223), chr(128) );
+	$umlaut_chars['ecto']  = array( 'Ä', 'ä', 'Ö', 'ö', 'Ü', 'ü', 'ß', '€' );
+	$umlaut_chars['html']  = array( '&Auml;', '&auml;', '&Ouml;', '&ouml;', '&Uuml;', '&uuml;', '&szlig;', '&euro;' );
+	$umlaut_chars['feed']  = array( '&#196;', '&#228;', '&#214;', '&#246;', '&#220;', '&#252;', '&#223;', '&#128;' );
 	$umlaut_chars['utf8']  = array( 
 		utf8_encode( 'Ä' ), utf8_encode( 'ä' ), utf8_encode( 'Ö' ), utf8_encode( 'ö' ), 
-		utf8_encode( 'Ü' ), utf8_encode( 'ü' ), utf8_encode( 'ß' ) 
+		utf8_encode( 'Ü' ), utf8_encode( 'ü' ), utf8_encode( 'ß' ), utf8_encode( '€' )
 	);
-	$umlaut_chars['perma'] = array( 'Ae', 'ae', 'Oe', 'oe', 'Ue', 'ue', 'ss' );
+	$umlaut_chars['perma'] = array( 'Ae', 'ae', 'Oe', 'oe', 'Ue', 'ue', 'ss', 'EUR' );
 	
 	/**
 	 * Sanitizes the titles to get qualified german permalinks with correct transliteration
