@@ -56,15 +56,21 @@ if ( is_admin() // if we are at admin center
 	function de_DE_umlaut_permalinks( $title, $raw_title = NULL ) {
 		global $umlaut_chars;
 		
-		if ( !is_null( $raw_title ) )
+		if ( ! is_null( $raw_title ) )
 			$title = $raw_title;
 		
 		if ( seems_utf8( $title ) ) {
 			$invalid_latin_chars = array( 
 				chr(197).chr(146) => 'OE', chr(197).chr(147) => 'oe', chr(197).chr(160) => 'S', 
 				chr(197).chr(189) => 'Z', chr(197).chr(161) => 's', chr(197).chr(190) => 'z', 
-				chr(226).chr(130).chr(172) => 'E' 
+				// Euro Sign €
+				chr(226).chr(130).chr(172) => 'EUR',
+				// GBP (Pound) Sign £
+				chr(194).chr(163) => 'GBP'
 			);
+			// use for custom strings
+			$invalid_latin_chars = apply_filters( 'de_de_latin_char_list', $invalid_latin_chars );
+			
 			$title = utf8_decode( strtr( $title, $invalid_latin_chars) );
 		}
 		
