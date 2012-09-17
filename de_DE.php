@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * @version  0.7.5
  * @date     09/17/2012
  * suggestion by Heiko Rabe (www.code-styling.de), Frank Bueltge (bueltge.de), Thomas Scholz (toscho.de)
@@ -25,9 +25,12 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-// Check for the plugin with the same topic and doing nothing
-// Plugin: Germanizer
-// @see  https://github.com/toscho/Germanix-WordPress-Plugin/blob/master/germanix_url.php
+/**
+ * Check for the plugin Germanizer with the same topic and doing nothing
+ * 
+ * @see    https://github.com/toscho/Germanix-WordPress-Plugin/blob/master/germanix_url.php
+ * @since  09/17/2012
+ */
 if ( class_exists( 'Germanizer' ) )
 	return NULL;
 
@@ -250,4 +253,4 @@ if ( is_admin() // if we are at admin center
 			update_option( 'rss_language', 'de' );
 	}
 	
-}
+} // end if
