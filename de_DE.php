@@ -1,7 +1,7 @@
 <?php
 /*
- * @version  0.7.4
- * @date     04/26/2012
+ * @version  0.7.5
+ * @date     09/17/2012
  * suggestion by Heiko Rabe (www.code-styling.de), Frank Bueltge (bueltge.de), Thomas Scholz (toscho.de)
  * special german permalink sanitize will be only needed at admin center, xmlrpc calls, ajax and cron
  * avoid additional filtering at frontend html generation
@@ -24,7 +24,13 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
- 
+
+// Check for the plugin with the same topic and doing nothing
+// Plugin: Germanizer
+// @see  https://github.com/toscho/Germanix-WordPress-Plugin/blob/master/germanix_url.php
+if ( class_exists( 'Germanizer' ) )
+	return NULL;
+
 // Check for different constant
 // We need it only, ...
 if ( is_admin() // if we are at admin center 
