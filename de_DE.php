@@ -1,14 +1,24 @@
 <?php
 /**
- * @version  0.7.5
- * @date     09/17/2012
+ * WordPress Dropin that add special german permalink sanitize and replaces characters 
+ *  with appropriate transliterations uploads will be only needed at admin center and 
+ *  xmlrpc calls, pre-select also the german spell checker at TinyMCE
+ * 
+ * @version  0.7.6
+ * @date     04/03/2013
  * suggestion by Heiko Rabe (www.code-styling.de), Frank Bueltge (bueltge.de), Thomas Scholz (toscho.de)
  * special german permalink sanitize will be only needed at admin center, xmlrpc calls, ajax and cron
  * avoid additional filtering at frontend html generation
  * 
+ * Plugin Name: de_DE
+ * Plugin URI:  https://github.com/bueltge/de_DE.php
+ * Description: Add special german permalink sanitize and replaces characters with appropriate transliterations uploads will be only needed at admin center and xmlrpc calls, pre-select also the german spell checker at TinyMCE
+ * Author:      Frank Bültge, Heiko Rabe
+ * Version:     0.7.6
+ * License:     GPLv3
  * 
  * LICENSE: GPLv3
- * Copyright 2009 - 2012, Frank Bültge ( frank@bueltge.de )
+ * Copyright 2009 - 2013, Frank Bültge ( frank@bueltge.de )
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
