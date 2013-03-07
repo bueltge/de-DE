@@ -6,7 +6,7 @@ Diese Sprach-_DropIn_ ersetzt diverse Zeichen durch entprechende Strings in den 
 und den Namen hochgeladener Dateien. Im weiteren wird der Sprachschlüssel der Feeds und 
 die Standard-Sprache der Rechtschreibkorrektur des TinyMCE, des visuellen Editors, gesetzt.
 
-*Lösungen*
+####Lösungen
 
  * Ersatz von Umlauten und Sonderzeichen um saubere Permalinks zu erzeugen
    * Beispiel: _Häßliches Entlein_ wird im Permalink zu _haessliches-entlein_
@@ -15,7 +15,7 @@ die Standard-Sprache der Rechtschreibkorrektur des TinyMCE, des visuellen Editor
  * Setzt die Rechtschreibkorrektur des visuellen Editors auf die deutsche Sprache
  * Setzt den Sprachwert des Feed auf `de` (dafür hat WordPress keine sichtbare Option)
 
-*Hinweise*
+####Hinweise
  
  * Wenn das Plugin [Germanix](https://github.com/toscho/Germanix-WordPress-Plugin) aktiv ist, 
    dann wirkt dieses Plugin _de_DE.php_ nicht.
