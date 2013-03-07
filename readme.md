@@ -11,7 +11,7 @@ die Standard-Sprache der Rechtschreibkorrektur des TinyMCE, des visuellen Editor
  * Ersatz von Umlauten und Sonderzeichen um saubere Permalinks zu erzeugen
    * Beispiel: _Häßliches Entlein_ wird im Permalink zu _haessliches-entlein_
  * Dateinamen ersetzen: Sonderzeichen, Leerzeichen, Umlaute
-   * Beispiel: _Häßliches Entlein.png_ wird im Permalink zu _haessliches-entlein.png_
+   * Beispiel: _Häßliches Entlein.png_ wird zu _haessliches-entlein.png_
  * Setzt die Rechtschreibkorrektur des visuellen Editors auf die deutsche Sprache
  * Setzt den Sprachwert des Feed auf `de` (dafür hat WordPress keine sichtbare Option)
 
