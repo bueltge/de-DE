@@ -1,5 +1,9 @@
 # de_DE.php
 
+**dev Branch**
+
+Dieser Zweig ist für die Entwicklung, Nutzung ohne Gewähr und Testing
+
 ## Beschreibung (Deutsch)
 
 Diese Sprach-_DropIn_ ersetzt diverse Zeichen durch entprechende Strings in den Permalinks 
