@@ -1,8 +1,6 @@
 # de_DE.php
 
-**dev Branch**
-
-Dieser Zweig ist für die Entwicklung, Nutzung ohne Gewähr und Testing
+**dev Branch:** Dieser Zweig ist für die Entwicklung, Nutzung ohne Gewähr und Testing
 
 ## Beschreibung (Deutsch)
 
