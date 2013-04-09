@@ -117,7 +117,7 @@ if ( ! class_exists('WP_DE') ) {
 			$this->umlaut_chars['perma'] = array( 'Ae', 'ae', 'Oe', 'oe', 'Ue', 'ue', 'ss', 'EUR' );
 			
 			// maybe changes via hook for custom requirements
-			$this->umlaut_chars = apply_filters( 'de_DE_umlaut_chars' $this->umlaut_chars );
+			$this->umlaut_chars = apply_filters( 'de_DE_umlaut_chars', $this->umlaut_chars );
 		}
 		
 		protected function admin_init() {
