@@ -31,11 +31,6 @@ if ( class_exists( 'Germanizer' ) )
 
 if ( ! class_exists('WP_DE') ) {
 	
-	add_action(
-		'plugins_loaded',
-		array ( WP_DE::get_instance(), 'plugin_setup' )
-	);
-	
 	class WP_DE {
 		
 		/**
@@ -360,5 +355,10 @@ if ( ! class_exists('WP_DE') ) {
 		}
 		
 	} // END class WP_DE
+	
+	add_action(
+		'plugins_loaded',
+		array ( WP_DE::get_instance(), 'plugin_setup' )
+	);
 
 } // END if class_exists
