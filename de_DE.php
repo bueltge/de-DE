@@ -38,6 +38,11 @@ if ( class_exists( 'Germanizer' ) )
 
 if ( ! class_exists('WP_DE') ) {
 	
+	add_action(
+		'plugins_loaded',
+		array ( 'WP_DE', 'get_instance' )
+	);
+	
 	class WP_DE {
 		
 		/**
@@ -65,9 +70,10 @@ if ( ! class_exists('WP_DE') ) {
 		 * @return  object of this class
 		 */
 		public static function get_instance() {
-		
-			NULL === self::$instance and self::$instance = new self;
-		
+			
+			if ( NULL === self::$instance )
+				self::$instance = new self;
+			
 			return self::$instance;
 		}
 		
@@ -362,10 +368,5 @@ if ( ! class_exists('WP_DE') ) {
 		}
 		
 	} // END class WP_DE
-	
-	add_action(
-		'plugins_loaded',
-		array ( WP_DE::get_instance(), 'plugin_setup' )
-	);
 
 } // END if class_exists
