@@ -132,8 +132,6 @@ if ( ! class_exists('WP_DE') ) {
 			
 			// not sufficient to init on activation only?
 			add_action( 'admin_init', array( $this, 'set_rss_language' ) );
-			// pre-select the german spell checker at TinyMCE
-			add_filter( 'mce_spellchecker_languages', array( $this, 'spell_checker_default' ) );
 			
 			// only on plugin.php
 			add_filter( 'plugin_row_meta', array( $this, 'set_plugin_meta' ), 10, 2 );
