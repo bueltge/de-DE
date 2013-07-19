@@ -329,25 +329,6 @@ if ( ! class_exists('WP_DE') ) {
 		}
 		
 		/**
-		* pre-select the german spell checker at TinyMCE
-		* 
-		* @since   0.0.1
-		* @param   $langs  String
-		* @return  $res    String
-		*/
-		public function spell_checker_default( $langs ) {
-			
-			$arr = explode( ',', str_replace( '+', '', $langs ) );
-			$res = array();
-			
-			foreach( $arr as $lang ) {
-				$res[] = ( preg_match( '/=de$/', $lang) ? '+' . $lang : $lang );
-			}
-
-			return implode( ',', $res );
-		}
-		
-		/**
 		 * Add data to plugin meta in plugins list
 		 * 
 		 * @since   04/05/2013
