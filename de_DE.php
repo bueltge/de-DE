@@ -41,8 +41,9 @@
  * @see    https://github.com/toscho/Germanix-WordPress-Plugin/blob/master/germanix_url.php
  * @since  09/17/2012
  */
-if ( class_exists( 'Germanizer' ) )
+if ( class_exists( 'Germanizer' ) ) {
 	return NULL;
+}
 
 // Check for different constant
 // We need it only, ...
@@ -76,9 +77,10 @@ if ( is_admin() // if we are at admin center
 	 */
 	function de_DE_umlaut_permalinks( $title, $raw_title = NULL ) {
 		global $umlaut_chars;
-		
-		if ( ! is_null( $raw_title ) )
+
+		if ( ! is_null( $raw_title ) ) {
 			$title = $raw_title;
+		}
 		
 		if ( seems_utf8( $title ) ) {
 			$invalid_latin_chars = array( 
@@ -130,9 +132,10 @@ if ( is_admin() // if we are at admin center
 		$filename = remove_accents( $filename );
 		
 		if ( seems_utf8( $filename ) ) {
-			
-			if ( function_exists( 'mb_strtolower' ) )
+
+			if ( function_exists( 'mb_strtolower' ) ) {
 				$filename = mb_strtolower( $filename, 'UTF-8' );
+			}
 			
 			$filename = utf8_uri_encode( $filename, 200 );
 		}
@@ -268,9 +271,10 @@ if ( is_admin() // if we are at admin center
 	 * @return  void
 	 */
 	function de_DE_rss_language() {
-		
-		if ( 'de' !== get_option( 'rss_language' ) )
+
+		if ( 'de' !== get_option( 'rss_language' ) ) {
 			update_option( 'rss_language', 'de' );
+		}
 	}
 	
 } // end if
