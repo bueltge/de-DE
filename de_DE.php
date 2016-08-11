@@ -63,14 +63,16 @@ if ( is_admin() // if we are at admin center
 		utf8_encode( 'Ü' ), utf8_encode( 'ü' ), utf8_encode( 'ß' ), utf8_encode( '€' )
 	);
 	$umlaut_chars['perma'] = array( 'Ae', 'ae', 'Oe', 'oe', 'Ue', 'ue', 'ss', 'EUR' );
-	
+
 	/**
 	 * Sanitizes the titles to get qualified german permalinks with correct transliteration
-	 * 
+	 *
 	 * @since   0.0.1
+	 *
 	 * @param   $title      String
 	 * @param   $raw_title  String
-	 * @return  $title
+	 *
+	 * @return mixed|null|string $title
 	 */
 	function de_DE_umlaut_permalinks( $title, $raw_title = NULL ) {
 		global $umlaut_chars;
@@ -102,13 +104,15 @@ if ( is_admin() // if we are at admin center
 		
 		return $title;
 	}
-	
+
 	/**
 	 * Replace filename
-	 * 
+	 *
 	 * @since   0.6.0
+	 *
 	 * @param   $filename  String
-	 * @return  $filename  String
+	 *
+	 * @return mixed|string $filename  String
 	 */
 	function de_DE_replace_filename( $filename ) {
 		
@@ -141,13 +145,15 @@ if ( is_admin() // if we are at admin center
 		
 		return $filename;
 	}
-	
+
 	/**
 	 * Replace umlaut chars
-	 * 
+	 *
 	 * @since   0.1.0
+	 *
 	 * @param   $content  String
-	 * @return  $content  String
+	 *
+	 * @return mixed|String $content  String
 	 */
 	function de_DE_umlaut_xmlrpc_content( $content ) {
 		global $umlaut_chars;
@@ -157,13 +163,15 @@ if ( is_admin() // if we are at admin center
 		
 		return $content;
 	}
-	
+
 	/**
 	 * Filter umlaut chars of files
-	 * 
+	 *
 	 * @since   0.6.0
+	 *
 	 * @param   $filename  String
-	 * @return  $filename  String
+	 *
+	 * @return mixed|string $filename  String
 	 */
 	function de_DE_umlaut_filename( $filename ) {
 		global $umlaut_chars;
@@ -233,10 +241,12 @@ if ( is_admin() // if we are at admin center
 	add_filter( 'mce_spellchecker_languages', 'de_DE_spell_checker_default' );
 	/**
 	 * pre-select the german spell checker at TinyMCE
-	 * 
+	 *
 	 * @since   0.0.1
+	 *
 	 * @param   $langs  String
-	 * @return  $res    String
+	 *
+	 * @return string $res    String
 	 */
 	function de_DE_spell_checker_default( $langs ) {
 		
