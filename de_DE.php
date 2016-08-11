@@ -123,11 +123,11 @@ if ( is_admin() // if we are at admin center
 		// Strip HTML and PHP tags
 		$filename = strip_tags( $filename );
 		// Preserve escaped octets.
-		$filename = preg_replace( '|%([a-fA-F0-9][a-fA-F0-9])|', '---$1---', $filename );
+		$filename = preg_replace( '|%([a-fA-F0-9])|', '---$1---', $filename );
 		// Remove percent signs that are not part of an octet.
 		$filename = str_replace( '%', '', $filename );
 		// Restore octets.
-		$filename = preg_replace( '|---([a-fA-F0-9][a-fA-F0-9])---|', '%$1', $filename );
+		$filename = preg_replace( '|---([a-fA-F0-9])---|', '%$1', $filename );
 	
 		$filename = remove_accents( $filename );
 		
