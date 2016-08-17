@@ -9,7 +9,7 @@ die Standard-Sprache der Rechtschreibkorrektur des TinyMCE, des visuellen Editor
 ####Lösungen
 
  * Ersatz von Umlauten und Sonderzeichen um saubere Permalinks zu erzeugen
-   * Beispiel: _Das häßliche Entlein kostet 1 €_ wird im Permalink zu _das haessliches-entlein-kostet-1-eur-_
+   * Beispiel: _Das häßliche Entlein kostet 1 €_ wird im Permalink zu _das haessliches-entlein-kostet-1-eur_
  * Dateinamen ersetzen: Sonderzeichen, Leerzeichen, Umlaute
    * Beispiel: _Häßliches Entlein.png_ wird zu _haessliches-entlein.png_
  * Setzt die Rechtschreibkorrektur des visuellen Editors auf die deutsche Sprache
