@@ -9,7 +9,7 @@ die Standard-Sprache der Rechtschreibkorrektur des TinyMCE, des visuellen Editor
 ####Lösungen
 
  * Ersatz von Umlauten und Sonderzeichen um saubere Permalinks zu erzeugen
-   * Beispiel: _Häßliches Entlein_ wird im Permalink zu _haessliches-entlein_
+   * Beispiel: _Das häßliche Entlein kostet 1 €_ wird im Permalink zu _das haessliches-entlein-kostet-1-eur-_
  * Dateinamen ersetzen: Sonderzeichen, Leerzeichen, Umlaute
    * Beispiel: _Häßliches Entlein.png_ wird zu _haessliches-entlein.png_
  * Setzt die Rechtschreibkorrektur des visuellen Editors auf die deutsche Sprache
@@ -24,7 +24,7 @@ die Standard-Sprache der Rechtschreibkorrektur des TinyMCE, des visuellen Editor
 
  * Upload der Datei `de_DE.php` in Sprachordner, üblicherweise `wp-content/languages`
  * Das Dropin ist automatisch aktiv, sobald der Sprachschlüssel (Konstante: `WPLANG`) in der 
-   `wp-config.php`auf `de_DE` gesetzt ist.
+   `wp-config.php`auf `de_DE` gesetzt ist oder (seit WordPress Version 4.0) die Sprache Deutsch in den Einstellungen gesetzt ist.
 
 ### Einsatz als Plugin
 
