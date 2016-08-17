@@ -2,19 +2,20 @@
 /**
  * WordPress Dropin that add special german permalink sanitize and replaces characters 
  *  with appropriate transliterations uploads will be only needed at admin center and 
- *  xmlrpc calls, pre-select also the german spell checker at TinyMCE
+ *  xmlrpc calls, pre-select also the german spell checker at TinyMCE.
+ * Should works for Permalink, filename, search.
  * 
- * @version  0.7.7
- * @date     2016-08-11
+ * @version  0.7.8
+ * @date     2016-08-17
  * suggestion by Heiko Rabe (www.code-styling.de), Frank Bueltge (bueltge.de), Thomas Scholz (toscho.de)
  * special german permalink sanitize will be only needed at admin center, xmlrpc calls, ajax and cron
  * avoid additional filtering at frontend html generation
  * 
  * Plugin Name: de_DE
  * Plugin URI:  https://github.com/bueltge/de_DE.php
- * Description: Add special german permalink sanitize and replaces characters with appropriate transliterations uploads will be only needed at admin center and xmlrpc calls, pre-select also the german spell checker at TinyMCE
+ * Description: Add special german permalink sanitize and replaces characters with appropriate transliterations uploads will be only needed at admin center and xmlrpc calls, pre-select also the german spell checker at TinyMCE and set the rss language key.
  * Author:      Frank Bültge, Heiko Rabe
- * Version:     0.7.7
+ * Version:     0.7.8
  * License:     MIT
  * 
  * LICENSE: MIT
@@ -65,6 +66,8 @@ if ( is_admin() // if we are at admin center
 	);
 	$umlaut_chars['perma'] = array( 'Ae', 'ae', 'Oe', 'oe', 'Ue', 'ue', 'ss', 'EUR' );
 
+	remove_filter( 'sanitize_title', 'sanitize_title_with_dashes', 11 );
+	add_filter( 'sanitize_title', 'de_DE_umlaut_permalinks', 10, 2 );
 	/**
 	 * Sanitizes the titles to get qualified german permalinks with correct transliteration
 	 *
@@ -96,14 +99,14 @@ if ( is_admin() // if we are at admin center
 			
 			$title = utf8_decode( strtr( $title, $invalid_latin_chars) );
 		}
-		
+
 		$title = str_replace( $umlaut_chars['ecto'], $umlaut_chars['perma'], $title );
 		$title = str_replace( $umlaut_chars['in'], $umlaut_chars['perma'], $title );
 		$title = str_replace( $umlaut_chars['html'], $umlaut_chars['perma'], $title );
 		$title = remove_accents( $title );
 		$title = sanitize_title_with_dashes( $title );
 		$title = str_replace( '.', '-', $title );
-		
+
 		return $title;
 	}
 
@@ -133,10 +136,7 @@ if ( is_admin() // if we are at admin center
 		
 		if ( seems_utf8( $filename ) ) {
 
-			if ( function_exists( 'mb_strtolower' ) ) {
-				$filename = mb_strtolower( $filename, 'UTF-8' );
-			}
-			
+			$filename = mb_strtolower( $filename, 'UTF-8' );
 			$filename = utf8_uri_encode( $filename, 200 );
 		}
 		
@@ -167,6 +167,7 @@ if ( is_admin() // if we are at admin center
 		return $content;
 	}
 
+	add_filter( 'sanitize_file_name', 'de_DE_umlaut_filename', 10, 1 );
 	/**
 	 * Filter umlaut chars of files
 	 *
@@ -199,22 +200,7 @@ if ( is_admin() // if we are at admin center
 		
 		return $filename;
 	}
-	
-	/**
-	 * Enable cleaning of permalinks
-	 * 
-	 * @since   0.0.1
-	 */
-	remove_filter( 'sanitize_title', 'sanitize_title_with_dashes', 11 );
-	add_filter( 'sanitize_title', 'de_DE_umlaut_permalinks', 10, 2 );
-	
-	/**
-	 * Enable cleaning of filename
-	 * 
-	 * @since   0.0.1
-	 */
-	add_filter( 'sanitize_file_name', 'de_DE_umlaut_filename', 10, 1 );
-	
+
 	if ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) {
 	
 		// referenced to: feed.php filters (extend it if necessary)
