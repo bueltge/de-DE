@@ -5,8 +5,8 @@
  *  xmlrpc calls, pre-select also the german spell checker at TinyMCE.
  * Should works for Permalink, filename, search.
  * 
- * @version  0.7.8
- * @date     2016-08-17
+ * @version  0.7.9
+ * @date     2016-08-22
  * suggestion by Heiko Rabe (www.code-styling.de), Frank Bueltge (bueltge.de), Thomas Scholz (toscho.de)
  * special german permalink sanitize will be only needed at admin center, xmlrpc calls, ajax and cron
  * avoid additional filtering at frontend html generation
@@ -15,7 +15,7 @@
  * Plugin URI:  https://github.com/bueltge/de_DE.php
  * Description: Add special german permalink sanitize and replaces characters with appropriate transliterations uploads will be only needed at admin center and xmlrpc calls, pre-select also the german spell checker at TinyMCE and set the rss language key.
  * Author:      Frank Bültge, Heiko Rabe
- * Version:     0.7.8
+ * Version:     0.7.9
  * License:     MIT
  * 
  * LICENSE: MIT
@@ -188,7 +188,7 @@ if ( is_admin() // if we are at admin center
 				chr(197).chr(189)          => 'Z',
 				chr(197).chr(161)          => 's',
 				chr(197).chr(190)          => 'z', 
-				chr(226).chr(130).chr(172) => 'E' 
+				chr(226).chr(130).chr(172) => 'EUR' 
 			);
 			$filename = utf8_decode( strtr( $filename, $invalid_latin_chars) );
 		}
