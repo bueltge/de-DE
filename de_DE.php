@@ -5,8 +5,8 @@
  *  xmlrpc calls, pre-select also the german spell checker at TinyMCE.
  * Should works for Permalink, filename, search.
  *
- * @version  0.7.10
- * @date     2016-11-24
+ * @version  0.7.11
+ * @date     2017-03-28
  * suggestion by Heiko Rabe (www.code-styling.de), Frank Bueltge (bueltge.de), Thomas Scholz (toscho.de)
  * special german permalink sanitize will be only needed at admin center, xmlrpc calls, ajax and cron
  * avoid additional filtering at frontend html generation
@@ -18,7 +18,7 @@
  * the rss language key. Author:      Frank Bültge, Heiko Rabe Version:     0.7.10 License:     MIT
  *
  * LICENSE: MIT
- * Copyright 2009 - 2016, Frank Bültge ( frank@bueltge.de )
+ * Copyright 2009 - 2017, Frank Bültge ( frank@bueltge.de )
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -193,24 +193,30 @@ if ( is_admin() // if we are at admin center
 	/**
 	 * Filter umlaut chars of files
 	 *
-	 * @since  0.6.0
+	 * @since   0.6.0
 	 *
-	 * @param  string $filename String.
+	 * @version 2017-03-28
 	 *
-	 * @return mixed|string $filename String.
+	 * @param   string $filename String.
+	 *
+	 * @return  mixed|string $filename String.
 	 */
 	function de_DE_umlaut_filename( $filename ) {
 
 		global $umlaut_chars;
 
+		if ( ! class_exists( 'Normalizer' ) ) {
+			$filename = Normalizer::normalize( $filename, Normalizer::FORM_C );
+		}
+
 		if ( seems_utf8( $filename ) ) {
 			$invalid_latin_chars = array(
-				chr( 197 ) . chr( 146 )              => 'OE',
-				chr( 197 ) . chr( 147 )              => 'oe',
-				chr( 197 ) . chr( 160 )              => 'S',
-				chr( 197 ) . chr( 189 )              => 'Z',
-				chr( 197 ) . chr( 161 )              => 's',
-				chr( 197 ) . chr( 190 )              => 'z',
+				chr( 197 ) . chr( 146 )                    => 'OE',
+				chr( 197 ) . chr( 147 )                    => 'oe',
+				chr( 197 ) . chr( 160 )                    => 'S',
+				chr( 197 ) . chr( 189 )                    => 'Z',
+				chr( 197 ) . chr( 161 )                    => 's',
+				chr( 197 ) . chr( 190 )                    => 'z',
 				chr( 226 ) . chr( 130 ) . chr( 172 ) => 'EUR',
 			);
 			$filename            = utf8_decode( strtr( $filename, $invalid_latin_chars ) );
