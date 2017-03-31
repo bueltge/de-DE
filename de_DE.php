@@ -6,7 +6,7 @@
  * Should works for Permalink, filename, search.
  *
  * @version  0.7.11
- * @date     2017-03-28
+ * @date     2017-03-31
  * suggestion by Heiko Rabe (www.code-styling.de), Frank Bueltge (bueltge.de), Thomas Scholz (toscho.de)
  * special german permalink sanitize will be only needed at admin center, xmlrpc calls, ajax and cron
  * avoid additional filtering at frontend html generation
@@ -195,7 +195,7 @@ if ( is_admin() // if we are at admin center
 	 *
 	 * @since   0.6.0
 	 *
-	 * @version 2017-03-28
+	 * @version 2017-03-31
 	 *
 	 * @param   string $filename String.
 	 *
@@ -205,7 +205,7 @@ if ( is_admin() // if we are at admin center
 
 		global $umlaut_chars;
 
-		if ( ! class_exists( 'Normalizer' ) ) {
+		if ( class_exists( 'Normalizer' ) ) {
 			$filename = Normalizer::normalize( $filename, Normalizer::FORM_C );
 		}
 
