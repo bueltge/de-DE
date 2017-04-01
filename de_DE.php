@@ -8,31 +8,19 @@
  * @version  0.7.11
  * @date     2017-03-31
  * suggestion by Heiko Rabe (www.code-styling.de), Frank Bueltge (bueltge.de), Thomas Scholz (toscho.de)
- * special german permalink sanitize will be only needed at admin center, xmlrpc calls, ajax and cron
+ * special german permalink sanitize will be only needed at admin center,
+ * xmlrpc calls, ajax and cron
  * avoid additional filtering at frontend html generation
  *
  * Plugin Name: de_DE
  * Plugin URI:  https://github.com/bueltge/de_DE.php
- * Description: Add special german permalink sanitize and replaces characters with appropriate transliterations uploads
- * will be only needed at admin center and xmlrpc calls, pre-select also the german spell checker at TinyMCE and set
- * the rss language key. Author:      Frank Bültge, Heiko Rabe Version:     0.7.10 License:     MIT
+ * Description: Add special german permalink sanitize and replaces characters with appropriate transliterations uploads will be only needed at admin center and xmlrpc calls, pre-select also the german spell checker at TinyMCE and set the rss language key.
+ * Author:      Frank Bültge, Heiko Rabe
+ * Version:     0.7.11
+ * License:     GPLv3+
  *
- * LICENSE: MIT
+ * LICENSE: GPLv3+
  * Copyright 2009 - 2017, Frank Bültge ( frank@bueltge.de )
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 3
- * of the License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 /**
