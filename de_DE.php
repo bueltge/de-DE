@@ -5,8 +5,8 @@
  *  xmlrpc calls, pre-select also the german spell checker at TinyMCE.
  * Should works for Permalink, filename, search.
  *
- * @version  0.7.11
- * @date     2017-03-31
+ * @version  0.7.12
+ * @date     2017-04-06
  * suggestion by Heiko Rabe (www.code-styling.de), Frank Bueltge (bueltge.de), Thomas Scholz (toscho.de)
  * special german permalink sanitize will be only needed at admin center,
  * xmlrpc calls, ajax and cron
@@ -16,7 +16,7 @@
  * Plugin URI:  https://github.com/bueltge/de_DE.php
  * Description: Add special german permalink sanitize and replaces characters with appropriate transliterations uploads will be only needed at admin center and xmlrpc calls, pre-select also the german spell checker at TinyMCE and set the rss language key.
  * Author:      Frank Bültge, Heiko Rabe
- * Version:     0.7.11
+ * Version:     0.7.12
  * License:     GPLv3+
  *
  * LICENSE: GPLv3+
@@ -193,10 +193,6 @@ if ( is_admin() // if we are at admin center
 
 		global $umlaut_chars;
 
-		if ( class_exists( 'Normalizer' ) ) {
-			$filename = Normalizer::normalize( $filename, Normalizer::FORM_C );
-		}
-
 		if ( seems_utf8( $filename ) ) {
 			$invalid_latin_chars = array(
 				chr( 197 ) . chr( 146 )                    => 'OE',
@@ -214,6 +210,12 @@ if ( is_admin() // if we are at admin center
 		$filename = str_replace( $umlaut_chars['in'], $umlaut_chars['perma'], $filename );
 		$filename = str_replace( $umlaut_chars['html'], $umlaut_chars['perma'], $filename );
 		$filename = de_DE_replace_filename( $filename );
+
+		if ( class_exists( 'Normalizer' ) ) {
+			$filename = Normalizer::normalize( $filename, Normalizer::FORM_C );
+		} else {
+			$filename = de_DE_unaccent( $filename );
+		}
 
 		return $filename;
 	}
@@ -242,6 +244,24 @@ if ( is_admin() // if we are at admin center
 		) {
 			add_action( $action, 'de_DE_umlaut_xmlrpc_content' );
 		}
+	}
+
+	/**
+	 * Simple alternate to the Normalizer class.
+	 *
+	 * @see    http://stackoverflow.com/questions/1890854/how-to-replace-special-characters-with-the-ones-theyre-based-on-in-php
+	 *
+	 * @param  string $string String of the file.
+	 *
+	 * @return string String of the file.
+	 */
+	function de_DE_unaccent( $string ) {
+
+		return preg_replace(
+			'~&([a-z]{1,2})(acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i',
+			'$1',
+			htmlentities( $string, ENT_QUOTES, 'UTF-8' )
+		);
 	}
 
 	add_filter( 'mce_spellchecker_languages', 'de_DE_spell_checker_default' );
