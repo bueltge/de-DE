@@ -193,6 +193,10 @@ if ( is_admin() // if we are at admin center
 
 		global $umlaut_chars;
 
+		if ( class_exists( 'Normalizer' ) ) {
+			$filename = Normalizer::normalize( $filename, Normalizer::FORM_C );
+		}
+
 		if ( seems_utf8( $filename ) ) {
 			$invalid_latin_chars = array(
 				chr( 197 ) . chr( 146 )                    => 'OE',
@@ -211,9 +215,7 @@ if ( is_admin() // if we are at admin center
 		$filename = str_replace( $umlaut_chars['html'], $umlaut_chars['perma'], $filename );
 		$filename = de_DE_replace_filename( $filename );
 
-		if ( class_exists( 'Normalizer' ) ) {
-			$filename = Normalizer::normalize( $filename, Normalizer::FORM_C );
-		} else {
+		if ( ! class_exists( 'Normalizer' ) ) {
 			$filename = de_DE_unaccent( $filename );
 		}
 
