@@ -5,8 +5,8 @@
  *  xmlrpc calls, pre-select also the german spell checker at TinyMCE.
  * Should works for Permalink, filename, search.
  *
- * @version  0.7.13
- * @date     2017-04-06
+ * @version  0.7.14
+ * @date     2017-04-07
  * suggestion by Heiko Rabe (www.code-styling.de), Frank Bueltge (bueltge.de), Thomas Scholz (toscho.de)
  * special german permalink sanitize will be only needed at admin center,
  * xmlrpc calls, ajax and cron
@@ -16,7 +16,7 @@
  * Plugin URI:  https://github.com/bueltge/de_DE.php
  * Description: Add special german permalink sanitize and replaces characters with appropriate transliterations uploads will be only needed at admin center and xmlrpc calls, pre-select also the german spell checker at TinyMCE and set the rss language key.
  * Author:      Frank Bültge, Heiko Rabe
- * Version:     0.7.13
+ * Version:     0.7.14
  * License:     GPLv3+
  *
  * LICENSE: GPLv3+
@@ -183,7 +183,7 @@ if ( is_admin() // if we are at admin center
 	 *
 	 * @since   0.6.0
 	 *
-	 * @version 2017-04-06
+	 * @version 2017-03-31
 	 *
 	 * @param   string $filename String.
 	 *
@@ -195,6 +195,8 @@ if ( is_admin() // if we are at admin center
 
 		if ( class_exists( 'Normalizer' ) ) {
 			$filename = Normalizer::normalize( $filename, Normalizer::FORM_C );
+		} else {
+			$filename = de_DE_unaccent( $filename );
 		}
 
 		if ( seems_utf8( $filename ) ) {
@@ -214,10 +216,6 @@ if ( is_admin() // if we are at admin center
 		$filename = str_replace( $umlaut_chars['in'], $umlaut_chars['perma'], $filename );
 		$filename = str_replace( $umlaut_chars['html'], $umlaut_chars['perma'], $filename );
 		$filename = de_DE_replace_filename( $filename );
-
-		if ( ! class_exists( 'Normalizer' ) ) {
-			$filename = de_DE_unaccent( $filename );
-		}
 
 		return $filename;
 	}
@@ -249,9 +247,9 @@ if ( is_admin() // if we are at admin center
 	}
 
 	/**
-	 * Simple alternate to the Normalizer class.
+	 * Simple and hard alternate to the Normalizer class.
 	 *
-	 * @see    http://stackoverflow.com/questions/1890854/how-to-replace-special-characters-with-the-ones-theyre-based-on-in-php
+	 * @since  0.7.11
 	 *
 	 * @param  string $string String of the file.
 	 *
@@ -260,9 +258,15 @@ if ( is_admin() // if we are at admin center
 	function de_DE_unaccent( $string ) {
 
 		return preg_replace(
-			'~&([a-z]{1,2})(acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i',
-			'$1',
-			htmlentities( $string, ENT_QUOTES, 'UTF-8' )
+			array(
+				'~&([a-z]{1,2})(acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml|caron|lig);~i',
+				"/[^a-zA-Z0-9\s.-]/i",
+			),
+			array(
+				'$1',
+				'',
+			),
+			strtolower( htmlentities( $string, ENT_QUOTES, 'UTF-8' ) )
 		);
 	}
 
