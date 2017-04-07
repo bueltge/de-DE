@@ -1,0 +1,50 @@
+=== de_DE ===
+Contributors: Bueltge
+Donate link: https://www.paypal.me/FrankBueltge
+Tags: german, ascii
+Requires at least: 4.0
+Tested up to: 4.8.0-alpha
+Stable tag: 0.7.14
+
+Replace Non-ASCII characters for installs, that set the german language as primary language.
+
+== Description ==
+The solution is normally interested for installs, there set the language to de_DE, German. This Plugin, also usable as Drop In, replaces non-ASCII strings, especially german umlauts, with a alternate in permalinks, uploaded files. It pre-select also the german spell checker at the TinyMCE, the Viusal mode of the editor. Also add it the german language key to the feed.
+
+The follow hints are only in German language.
+
+= Beschreibung =
+
+Diese Sprach-_DropIn_ ersetzt diverse Zeichen durch entprechende Strings in den Permalinks und den Namen hochgeladener Dateien. Im weiteren wird der Sprachschlüssel der Feeds und die Standard-Sprache der Rechtschreibkorrektur des TinyMCE, des visuellen Editors, gesetzt.
+
+= Lösungen =
+
+ * Ersatz von Umlauten und Sonderzeichen um saubere Permalinks zu erzeugen
+   * Beispiel: _Das häßliche Entlein kostet 1 €_ wird im Permalink zu _das haessliches-entlein-kostet-1-eur_
+ * Dateinamen ersetzen: Sonderzeichen, Leerzeichen, Umlaute
+   * Beispiel: _Häßliches Entlein.png_ wird zu _haessliches-entlein.png_
+ * Setzt die Rechtschreibkorrektur des visuellen Editors auf die deutsche Sprache
+ * Setzt den Sprachwert des Feed auf `de` (dafür hat WordPress keine sichtbare Option)
+
+= Hinweise =
+
+ * Wenn das Plugin [Germanix](https://github.com/toscho/Germanix-WordPress-Plugin) aktiv ist, dann wirkt dieses Plugin/ Dropin `de_DE.php` nicht.
+ * Support, Fehler, Ergänzen bitte via [GitHub](https://github.com/bueltge/de_DE.php/)
+ 
+== Installation ==
+
+= Einsatz als Dropin =
+
+ * Upload der Datei `de_DE.php` in Sprachordner, üblicherweise `wp-content/languages`
+ * Das Dropin ist automatisch aktiv, sobald der Sprachschlüssel (Konstante: `WPLANG`) in der 
+   `wp-config.php`auf `de_DE` gesetzt ist oder (seit WordPress Version 4.0) die Sprache Deutsch in den Einstellungen gesetzt ist.
+
+= Einsatz als Plugin =
+
+ * Upload des Ordners oder nur der Datei `de_DE.php` in den Plugin-Ordner der Installation
+   , im Standard ist das `wp-content/plugins`
+ * Das Plugin im Administrationsbereich --> Plugins aktivieren
+ 
+== Changelog ==
+= 0.7.14 (2017-04-07) =
+* First release on wordpress.org, before only public on github
