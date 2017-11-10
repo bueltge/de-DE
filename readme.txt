@@ -3,7 +3,7 @@ Contributors: Bueltge
 Donate link: https://www.paypal.me/FrankBueltge
 Tags: german, ascii
 Requires at least: 3.5
-Tested up to: 4.8-alpha
+Tested up to: 4.9
 Stable tag: 0.7.14
 
 Replace Non-ASCII characters for installs, that set the german language as primary language.
