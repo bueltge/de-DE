@@ -5,8 +5,8 @@
  *  xmlrpc calls, pre-select also the german spell checker at TinyMCE.
  * Should works for Permalink, filename, search.
  *
- * @version  0.7.14
- * @date     2017-04-07
+ * @version  0.7.15
+ * @date     2018-09-15
  * suggestion by Heiko Rabe (www.code-styling.de), Frank Bueltge (bueltge.de), Thomas Scholz (toscho.de)
  * special german permalink sanitize will be only needed at admin center,
  * xmlrpc calls, ajax and cron
@@ -16,11 +16,11 @@
  * Plugin URI:  https://github.com/bueltge/de_DE.php
  * Description: Add special german permalink sanitize and replaces characters with appropriate transliterations uploads will be only needed at admin center and xmlrpc calls, pre-select also the german spell checker at TinyMCE and set the rss language key.
  * Author:      Frank Bültge, Heiko Rabe
- * Version:     0.7.14
+ * Version:     0.7.15
  * License:     GPLv3+
  *
  * LICENSE: GPLv3+
- * Copyright 2009 - 2017, Frank Bültge ( frank@bueltge.de )
+ * Copyright 2009 - 2018, Frank Bültge ( frank@bueltge.de )
  */
 
 /**
@@ -268,28 +268,6 @@ if ( is_admin() // if we are at admin center
 			),
 			strtolower( htmlentities( $string, ENT_QUOTES, 'UTF-8' ) )
 		);
-	}
-
-	add_filter( 'mce_spellchecker_languages', 'de_DE_spell_checker_default' );
-	/**
-	 * A pre-select the german spell checker at TinyMCE.
-	 *
-	 * @since   0.0.1
-	 *
-	 * @param  string $langs  String.
-	 *
-	 * @return string $res    String.
-	 */
-	function de_DE_spell_checker_default( $langs ) {
-
-		$arr = explode( ',', str_replace( '+', '', $langs ) );
-		$res = array();
-
-		foreach ( $arr as $lang ) {
-			$res[] = ( preg_match( '/=de$/', $lang ) ? '+' . $lang : $lang );
-		}
-
-		return implode( ',', $res );
 	}
 
 	add_action( 'admin_init', 'de_DE_rss_language' );
