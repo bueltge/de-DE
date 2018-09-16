@@ -17,7 +17,7 @@ die Standard-Sprache der Rechtschreibkorrektur des TinyMCE, des visuellen Editor
 
 #### Hinweise
  
- * Wenn das Plugin [Germanix](https://github.com/toscho/Germanix-WordPress-Plugin) aktiv ist, 
+ * Wenn das Plugin [Germanix](https://github.com/thefuxia/Germanix-WordPress-Plugin) aktiv ist, 
    dann wirkt dieses Plugin _de_DE.php_ nicht.
  
 ### Einsatz als Dropin
