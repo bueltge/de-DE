@@ -3,19 +3,19 @@ Contributors: Bueltge
 Donate link: https://www.paypal.me/FrankBueltge
 Tags: german, ascii
 Requires at least: 3.5
-Tested up to: 4.9
-Stable tag: 0.7.14
+Tested up to: 5.0
+Stable tag: 0.7.15
 
 Replace Non-ASCII characters for installs, that set the german language as primary language.
 
 == Description ==
-The solution is usally interested in installations whose set the language to de_DE, German. This Plugin, also usable as Drop In, replaces non-ASCII strings, especially german umlauts, with a alternate in permalinks, uploaded files. It pre-select also the german spell checker at the TinyMCE, the Viusal mode of the editor. Also add it the german language key to the feed.
+The solution is usally interested in installations whose set the language to de_DE, German. This Plugin, also usable as Drop In, replaces non-ASCII strings, especially german umlauts, with a alternate in permalinks, uploaded files. Also add it the german language key to the feed.
 
 *The follow hints are only available in German language.*
 
 = Beschreibung =
 
-Diese Sprach-_DropIn_ ersetzt diverse Zeichen durch entprechende Strings in den Permalinks und den Namen hochgeladener Dateien. Im weiteren wird der Sprachschlüssel der Feeds und die Standard-Sprache der Rechtschreibkorrektur des TinyMCE, des visuellen Editors, gesetzt.
+Diese Sprach-_DropIn_ ersetzt diverse Zeichen durch entprechende Strings in den Permalinks und den Namen hochgeladener Dateien. Im weiteren wird der Sprachschlüssel der Feeds gesetzt.
 
 = Lösungen =
 
@@ -23,7 +23,6 @@ Diese Sprach-_DropIn_ ersetzt diverse Zeichen durch entprechende Strings in den 
    * Beispiel: _Das häßliche Entlein kostet 1 €_ wird im Permalink zu _das haessliches-entlein-kostet-1-eur_
  * Dateinamen ersetzen: Sonderzeichen, Leerzeichen, Umlaute
    * Beispiel: _Häßliches Entlein.png_ wird zu _haessliches-entlein.png_
- * Setzt die Rechtschreibkorrektur des visuellen Editors auf die deutsche Sprache
  * Setzt den Sprachwert des Feed auf `de` (dafür hat WordPress keine sichtbare Option)
 
 = Hinweise =
@@ -48,5 +47,8 @@ Diese Sprach-_DropIn_ ersetzt diverse Zeichen durch entprechende Strings in den 
  * Das Plugin im Administrationsbereich --> Plugins aktivieren
  
 == Changelog ==
+= 0.7.15 (2018-11-13) =
+* Remove setting default spellchecker, because the spellchecker of the editor is since version 3.5 no longer available.
+
 = 0.7.14 (2017-04-07) =
 * First release on wordpress.org, before only public on github
