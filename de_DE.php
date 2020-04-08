@@ -69,6 +69,13 @@ if (PHP_VERSION_ID < 70000) {
 }
 
 add_action(
+    'rest_api_init',
+    static function () {
+        $de = new de_DE();
+        $de->onRest();
+    }
+);
+add_action(
     'plugins_loaded',
     static function () {
         $de = new de_DE();
@@ -122,12 +129,18 @@ class de_DE
 
     public function onLoad()
     {
+        if (!$this->excludes()){
+            return;
+        }
         remove_filter('sanitize_title', 'sanitize_title_with_dashes', 11);
         add_filter('sanitize_title', [$this, 'sanitizeTitle'], 10, 2);
-        add_filter('wp_handle_upload_prefilter', [$this, 'sanitizeUpload']);
         add_filter('sanitize_file_name', [$this, 'normalize']);
         $this->onXmlrpc();
         $this->setRssLanguage();
+    }
+
+    public function onRest() {
+        add_filter('wp_handle_upload_prefilter', [$this, 'sanitizeUpload']);
     }
 
     /**
@@ -714,29 +727,15 @@ class de_DE
 
     /**
      * Check that we are on the right area.
+     *
+     * @return bool
      */
-    private function excludes()
+    private function excludes(): bool
     {
-        if (is_admin()) {
-            return true;
-        }
-
-        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-            return true;
-        }
-
-        if (defined('DOING_AJAX') && DOING_AJAX) {
-            return true;
-        }
-
-        if (defined('DOING_CRON') && DOING_CRON) {
-            return true;
-        }
-
-        if (defined('REST_REQUEST') && REST_REQUEST) {
-            return true;
-        }
-
-        return false;
+        return is_admin()
+            || (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
+            || (defined('DOING_AJAX') && DOING_AJAX)
+            || (defined('DOING_CRON') && DOING_CRON)
+            || (defined('REST_REQUEST') && REST_REQUEST);
     }
 }
