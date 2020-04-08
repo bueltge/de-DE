@@ -1,0 +1,43 @@
+{
+    "name": "bueltge/de_DE.php",
+    "type": "wordpress-muplugin",
+    "description": "WordPress-Plugin that add special german permalink sanitize and replaces characters.",
+    "keywords": [
+        "wordpress",
+        "plugin"
+    ],
+    "homepage": "https://github.com/bueltge/de_DE.php",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Frank Bültge",
+            "email": "f.bueltge@inpsyde.com",
+            "homepage": "https://bueltge.de",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "composer/installers": "^1.2"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3",
+        "inpsyde/php-coding-standards": "^0.13",
+        "brain/monkey": "^2.2",
+        "phpunit/phpunit": "^8.0"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "platform": {
+            "php": "7.0.0"
+        }
+    },
+    "scripts": {
+        "zip": "composer archive --format=zip --file=dist",
+        "build": "./scripts/build",
+        "analyze": "phpstan analyse src"
+    },
+    "extra": {
+        "installer-disable": true
+    }
+}
