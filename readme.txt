@@ -1,10 +1,13 @@
 === de_DE ===
 Contributors: Bueltge
 Donate link: https://www.paypal.me/FrankBueltge
-Tags: german, ascii
+Tags: german, ascii, permalink, umlaut, upload
 Requires at least: 3.5
-Tested up to: 5.0
+Tested up to: 5.4
+Requires PHP: 5.6
 Stable tag: 0.7.15
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Replace Non-ASCII characters for installs, that set the german language as primary language.
 
