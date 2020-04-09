@@ -139,8 +139,9 @@ class de_DE
         $this->setRssLanguage();
     }
 
+    //wp_handle_upload_prefilter
     public function onRest() {
-        add_filter('wp_handle_upload_prefilter', [$this, 'sanitizeUpload']);
+        add_filter('wp_handle_upload_prefilter', [$this, 'sanitizeUpload'], 10, 1);
     }
 
     /**
@@ -370,14 +371,13 @@ class de_DE
     /**
      * Sanitize the name of a file.
      *
-     * @param array $file
+     * @param array
      *
      * @return array
      */
-    public function sanitizeUpload(array $file): array
+    public function sanitizeUpload( array $file ): array
     {
         $file['name'] = $this->normalize($file['name']);
-
         return $file;
     }
 
