@@ -34,6 +34,3 @@ transliterations uploads will be only needed at admin center and xmlrpc calls.
  * Upload des Ordners oder nur der Datei `de_DE.php` in den Plugin-Ordner der Installation
    , im Standard ist das `wp-content/plugins`
  * Das Plugin im Administrationsbereich --> Plugins aktivieren
-
-mehr Information bei Heiko [Permalinks mit Umlauten ohne o42-clean-umlauts](http://www.code-styling.de/deutsch/permalinks-mit-umlauten-ohne-o42-clean-umlauts)
-oder auf [Das WordPress-Buch](http://wordpress-buch.bueltge.de/das-wordpress-buch/downloads/extra/)
