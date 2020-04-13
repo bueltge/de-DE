@@ -129,7 +129,7 @@ class de_DE
 
     public function onLoad()
     {
-        if (!$this->excludes()){
+        if (!$this->excludes()) {
             return;
         }
         remove_filter('sanitize_title', 'sanitize_title_with_dashes', 11);
@@ -140,7 +140,8 @@ class de_DE
     }
 
     //wp_handle_upload_prefilter
-    public function onRest() {
+    public function onRest()
+    {
         add_filter('wp_handle_upload_prefilter', [$this, 'sanitizeUpload'], 10, 1);
     }
 
@@ -375,7 +376,7 @@ class de_DE
      *
      * @return array
      */
-    public function sanitizeUpload( array $file ): array
+    public function sanitizeUpload(array $file): array
     {
         $file['name'] = $this->normalize($file['name']);
         return $file;
