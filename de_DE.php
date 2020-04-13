@@ -27,96 +27,38 @@ namespace de_DE;
 
 use Normalizer;
 
-/**
- * Check for the plugin Germanizer with the same topic and doing nothing
- *
- * @see    https://github.com/toscho/Germanix-WordPress-Plugin/blob/master/germanix_url.php
- * @since  09/17/2012
- */
-if (class_exists('Germanizer')) {
-    return;
-}
-
-!defined('ABSPATH') && exit;
-
-if (PHP_VERSION_ID < 70000) {
-    $hooks = [
-        'admin_notices',
-        'network_admin_notices',
-    ];
-    foreach ($hooks as $hook) {
-        add_action(
-            $hook,
-            static function () {
-                $message = __(
-                    'The plugin de_DE requires at least PHP version 7. <br />Please ask your server administrator to update your environment to PHP version 7.',
-                    'de-de'
-                );
-
-                printf(
-                    '<div class="notice notice-error"><span class="notice-title">%1$s</span><p>%2$s</p></div>',
-                    esc_html__(
-                        'The plugin has been deactivated',
-                        'de-de'
-                    ),
-                    wp_kses($message, ['br' => true])
-                );
-
-                deactivate_plugins(plugin_basename(__FILE__));
-            }
-        );
-    }
-
-    return;
-}
-
-add_action(
-    'rest_api_init',
-    static function () {
-        $de = new de_DE();
-        $de->onRest();
-    }
-);
-add_action(
-    'plugins_loaded',
-    static function () {
-        $de = new de_DE();
-        $de->onLoad();
-    }
-);
-
 class de_DE
 {
 
     /**
      * @var array
      */
-    private $umlaut_chars__in;
+    private $umlautChars__in;
 
     /**
      * @var array
      */
-    private $umlaut_chars__ecto;
+    private $umlautChars__ecto;
 
     /**
      * @var array
      */
-    private $umlaut_chars__html;
+    private $umlautChars__html;
 
     /**
      * @var array
      */
-    private $umlaut_chars__feed;
+    private $umlautChars__feed;
 
     /**
      * @var array
      */
-    private $umlaut_chars__utf8;
+    private $umlautChars__utf8;
 
     /**
      * @var array
      */
-    private $umlaut_chars__perma;
+    private $umlautChars__perma;
 
     /**
      * Store the hooks on there we should run the sanitizing for date from xmlprc surface.
@@ -141,7 +83,6 @@ class de_DE
         $this->setRssLanguage();
     }
 
-    //wp_handle_upload_prefilter
     public function onRest()
     {
         add_filter('wp_handle_upload_prefilter', [$this, 'sanitizeUpload'], 10, 1);
@@ -196,10 +137,10 @@ class de_DE
 
     public function html(): array
     {
-        if ($this->umlaut_chars__html) {
-            return $this->umlaut_chars__html;
+        if ($this->umlautChars__html) {
+            return $this->umlautChars__html;
         }
-        $this->umlaut_chars__html = (array)apply_filters(
+        $this->umlautChars__html = (array)apply_filters(
             'de_DE_html_list',
             [
                 '&Auml;',
@@ -213,15 +154,15 @@ class de_DE
             ]
         );
 
-        return $this->umlaut_chars__html;
+        return $this->umlautChars__html;
     }
 
     public function feed(): array
     {
-        if ($this->umlaut_chars__feed) {
-            return $this->umlaut_chars__feed;
+        if ($this->umlautChars__feed) {
+            return $this->umlautChars__feed;
         }
-        $this->umlaut_chars__feed = (array)apply_filters(
+        $this->umlautChars__feed = (array)apply_filters(
             'de_DE.feed',
             [
                 '&#196;',
@@ -235,15 +176,15 @@ class de_DE
             ]
         );
 
-        return $this->umlaut_chars__feed;
+        return $this->umlautChars__feed;
     }
 
     public function utf8(): array
     {
-        if ($this->umlaut_chars__utf8) {
-            return $this->umlaut_chars__utf8;
+        if ($this->umlautChars__utf8) {
+            return $this->umlautChars__utf8;
         }
-        $this->umlaut_chars__utf8 = (array)apply_filters(
+        $this->umlautChars__utf8 = (array)apply_filters(
             'de_DE.utf8',
             [
                 utf8_encode('Ä'),
@@ -257,25 +198,25 @@ class de_DE
             ]
         );
 
-        return $this->umlaut_chars__utf8;
+        return $this->umlautChars__utf8;
     }
 
     /**
      * Sanitizes the titles to get qualified german Permalinks with correct transliteration.
      *
      * @param string $title
-     * @param string $raw_title
+     * @param string $rawTitle
      *
      * @return string
      */
-    public function sanitizeTitle(string $title, string $raw_title = ''): string
+    public function sanitizeTitle(string $title, string $rawTitle = ''): string
     {
-        if ('' !== $raw_title) {
-            $title = $raw_title;
+        if ('' !== $rawTitle) {
+            $title = $rawTitle;
         }
 
         if (seems_utf8($title)) {
-            $invalid_latin_chars = [
+            $invalidLatinChars = [
                 chr(197).chr(146) => 'OE',
                 chr(197).chr(147) => 'oe',
                 chr(197).chr(160) => 'S',
@@ -288,9 +229,9 @@ class de_DE
                 chr(194).chr(163) => 'GBP',
             ];
             // use for custom strings
-            $invalid_latin_chars = apply_filters('de_de_latin_char_list', $invalid_latin_chars);
+            $invalidLatinChars = apply_filters('de_de_latin_char_list', $invalidLatinChars);
 
-            $title = utf8_decode(strtr($title, $invalid_latin_chars));
+            $title = utf8_decode(strtr($title, $invalidLatinChars));
         }
 
         $title = str_replace($this->ecto(), $this->perma(), $title);
@@ -304,10 +245,10 @@ class de_DE
 
     public function ecto(): array
     {
-        if ($this->umlaut_chars__ecto) {
-            return $this->umlaut_chars__ecto;
+        if ($this->umlautChars__ecto) {
+            return $this->umlautChars__ecto;
         }
-        $this->umlaut_chars__ecto = (array)apply_filters(
+        $this->umlautChars__ecto = (array)apply_filters(
             'de_DE_ecto_list',
             [
                 'Ä',
@@ -321,15 +262,15 @@ class de_DE
             ]
         );
 
-        return $this->umlaut_chars__ecto;
+        return $this->umlautChars__ecto;
     }
 
     public function perma(): array
     {
-        if ($this->umlaut_chars__perma) {
-            return $this->umlaut_chars__perma;
+        if ($this->umlautChars__perma) {
+            return $this->umlautChars__perma;
         }
-        $this->umlaut_chars__perma = (array)apply_filters(
+        $this->umlautChars__perma = (array)apply_filters(
             'de_DE_perma_list',
             [
                 'Ae',
@@ -343,7 +284,7 @@ class de_DE
             ]
         );
 
-        return $this->umlaut_chars__perma;
+        return $this->umlautChars__perma;
     }
 
     /**
@@ -351,10 +292,10 @@ class de_DE
      */
     public function in(): array
     {
-        if ($this->umlaut_chars__in) {
-            return $this->umlaut_chars__in;
+        if ($this->umlautChars__in) {
+            return $this->umlautChars__in;
         }
-        $this->umlaut_chars__in = (array)apply_filters(
+        $this->umlautChars__in = (array)apply_filters(
             'de_DE_in_list',
             [
                 chr(196),
@@ -368,7 +309,7 @@ class de_DE
             ]
         );
 
-        return $this->umlaut_chars__in;
+        return $this->umlautChars__in;
     }
 
     /**
@@ -400,7 +341,7 @@ class de_DE
         }
 
         if (seems_utf8($filename)) {
-            $invalid_latin_chars = [
+            $invalidLatinChars = [
                 chr(197).chr(146) => 'OE',
                 chr(197).chr(147) => 'oe',
                 chr(197).chr(160) => 'S',
@@ -409,7 +350,7 @@ class de_DE
                 chr(197).chr(190) => 'z',
                 chr(226).chr(130).chr(172) => 'EUR',
             ];
-            $filename = utf8_decode(strtr($filename, $invalid_latin_chars));
+            $filename = utf8_decode(strtr($filename, $invalidLatinChars));
         }
 
         $filename = str_replace($this->ecto(), $this->perma(), $filename);
@@ -742,3 +683,72 @@ class de_DE
             || (defined('REST_REQUEST') && REST_REQUEST);
     }
 }
+
+/**
+ * Bootstrap to use the class in different WordPress scenarios.
+ */
+function bootstrap()
+{
+    /**
+     * Check for the plugin Germanizer with the same topic and doing nothing
+     *
+     * @see    https://github.com/toscho/Germanix-WordPress-Plugin/blob/master/germanix_url.php
+     * @since  09/17/2012
+     */
+    if (class_exists('Germanizer')) {
+        return;
+    }
+
+    if (!ABSPATH) {
+        deactivate_plugins(plugin_basename(__FILE__));
+        exit();
+    }
+
+    if (PHP_VERSION_ID < 70000) {
+        $hooks = [
+            'admin_notices',
+            'network_admin_notices',
+        ];
+        foreach ($hooks as $hook) {
+            add_action(
+                $hook,
+                static function () {
+                    $message = __(
+                        'The plugin de_DE requires at least PHP version 7. <br />Please ask your server administrator to update your environment to PHP version 7.',
+                        'de-de'
+                    );
+
+                    printf(
+                        '<div class="notice notice-error"><span class="notice-title">%1$s</span><p>%2$s</p></div>',
+                        esc_html__(
+                            'The plugin has been deactivated',
+                            'de-de'
+                        ),
+                        wp_kses($message, ['br' => true])
+                    );
+
+                    deactivate_plugins(plugin_basename(__FILE__));
+                }
+            );
+        }
+
+        return;
+    }
+
+    add_action(
+        'rest_api_init',
+        static function () {
+            $deDe = new de_DE();
+            $deDe->onRest();
+        }
+    );
+    add_action(
+        'plugins_loaded',
+        static function () {
+            $deDe = new de_DE();
+            $deDe->onLoad();
+        }
+    );
+}
+
+bootstrap();
