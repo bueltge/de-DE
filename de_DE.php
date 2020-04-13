@@ -6,16 +6,18 @@
  * It pre-select also the german spell checker at TinyMCE and set the Feed language key.
  *
  * @version  1.0.0-dev
- * @date     2020-04-07
+ * @date     2020-04-13
  * suggestion by Heiko Rabe (www.code-styling.de), Frank Bueltge (bueltge.de), Thomas Scholz (toscho.de)
  *
  * Plugin Name: de_DE
  * Plugin URI:  https://github.com/bueltge/de_DE.php
  * Description: Add special german permalink sanitize and replaces characters with appropriate transliterations uploads
  *     will be only needed at admin center and xmlrpc calls, pre-select also the german spell checker at TinyMCE and
- *     set the rss language key. Author:      Frank Bültge Version:     1.0.0-dev License:     GPLv2+
+ *     set the rss language key.
+ * Author:      Frank Bültge
+ * Version:     1.0.0-dev
+ * License:     GPLv2+
  *
- * LICENSE: GPLv2+
  * Copyright 2009 - 2020, Frank Bültge ( frank@bueltge.de )
  */
 
