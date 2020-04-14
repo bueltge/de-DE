@@ -94,18 +94,9 @@ class de_DE
     public function onXmlrpc()
     {
         if (defined('XMLRPC_REQUEST') && XMLRPC_REQUEST) {
-            $this->xmlrpcAction = (array)apply_filters(
-                'de_DE_xmlrpc_hook_list',
-                [
-                    'the_title',
-                    'the_excerpt',
-                    'the_content',
-                    'comment_text',
-                    'the_category',
-                    'the_tags',
-                ]
-            );
-            add_action($this->xmlrpcAction, [$this, 'sanitizeXmlrpContent']);
+            foreach ($this->xmlrpcAction as $action) {
+                add_action($action, [$this, 'sanitizeXmlrpContent']);
+            }
         }
     }
 
@@ -120,26 +111,52 @@ class de_DE
     }
 
     /**
-     * Replace umlaut chars from the xmlrpc surface.
+     * Return a array with all hook filters to fire them and filter the content.
      *
-     * @param string $content
-     *
-     * @return string
+     * @return array
      */
-    public function sanitizeXmlrpContent(string $content): string
+    public function xmlrpcActions(): array
     {
-        return str_replace(
-            [$this->html(), $this->feed()],
-            [$this->utf8(), $this->utf8()],
-            $content
+        if ($this->xmlrpcAction) {
+            return $this->xmlrpcAction;
+        }
+        /**
+         * Filter the hooks there we use on sanitize with the function sanitizeXmlrpContent().
+         *
+         * @see sanitizeXmlrpContent()
+         *
+         * @param array
+         */
+        $this->xmlrpcAction = (array)apply_filters(
+            'de_DE_xmlrpc_hook_list',
+            [
+                'the_title',
+                'the_excerpt',
+                'the_content',
+                'comment_text',
+                'the_category',
+                'the_tags',
+            ]
         );
+
+        return $this->xmlrpcAction;
     }
 
+    /**
+     * Return the chars to filter in html format.
+     *
+     * @return array
+     */
     public function html(): array
     {
         if ($this->umlautChars__html) {
             return $this->umlautChars__html;
         }
+        /**
+         * Change, enhance the chars in html format for filtering.
+         *
+         * @param array
+         */
         $this->umlautChars__html = (array)apply_filters(
             'de_DE_html_list',
             [
@@ -157,6 +174,9 @@ class de_DE
         return $this->umlautChars__html;
     }
 
+    /**
+     * @return array
+     */
     public function feed(): array
     {
         if ($this->umlautChars__feed) {
@@ -179,6 +199,9 @@ class de_DE
         return $this->umlautChars__feed;
     }
 
+    /**
+     * @return array
+     */
     public function utf8(): array
     {
         if ($this->umlautChars__utf8) {
@@ -202,47 +225,8 @@ class de_DE
     }
 
     /**
-     * Sanitizes the titles to get qualified german Permalinks with correct transliteration.
-     *
-     * @param string $title
-     * @param string $rawTitle
-     *
-     * @return string
+     * @return array
      */
-    public function sanitizeTitle(string $title, string $rawTitle = ''): string
-    {
-        if ('' !== $rawTitle) {
-            $title = $rawTitle;
-        }
-
-        if (seems_utf8($title)) {
-            $invalidLatinChars = [
-                chr(197).chr(146) => 'OE',
-                chr(197).chr(147) => 'oe',
-                chr(197).chr(160) => 'S',
-                chr(197).chr(189) => 'Z',
-                chr(197).chr(161) => 's',
-                chr(197).chr(190) => 'z',
-                // Euro Sign €
-                chr(226).chr(130).chr(172) => 'EUR',
-                // GBP (Pound) Sign £
-                chr(194).chr(163) => 'GBP',
-            ];
-            // use for custom strings
-            $invalidLatinChars = apply_filters('de_de_latin_char_list', $invalidLatinChars);
-
-            $title = utf8_decode(strtr($title, $invalidLatinChars));
-        }
-
-        $title = str_replace($this->ecto(), $this->perma(), $title);
-        $title = str_replace($this->in(), $this->perma(), $title);
-        $title = str_replace($this->html(), $this->perma(), $title);
-        $title = remove_accents($title);
-        $title = sanitize_title_with_dashes($title);
-
-        return str_replace('.', '-', $title);
-    }
-
     public function ecto(): array
     {
         if ($this->umlautChars__ecto) {
@@ -312,6 +296,86 @@ class de_DE
         return $this->umlautChars__in;
     }
 
+
+    /**
+     * Sanitizes the titles to get qualified german Permalinks with correct transliteration.
+     *
+     * @param string $title
+     * @param string $rawTitle
+     *
+     * @return string
+     */
+    public function sanitizeTitle(string $title, string $rawTitle = ''): string
+    {
+        if ('' !== $rawTitle) {
+            $title = $rawTitle;
+        }
+
+        if (seems_utf8($title)) {
+            $invalidLatinChars = [
+                chr(197).chr(146) => 'OE',
+                chr(197).chr(147) => 'oe',
+                chr(197).chr(160) => 'S',
+                chr(197).chr(189) => 'Z',
+                chr(197).chr(161) => 's',
+                chr(197).chr(190) => 'z',
+                // Euro Sign €
+                chr(226).chr(130).chr(172) => 'EUR',
+                // GBP (Pound) Sign £
+                chr(194).chr(163) => 'GBP',
+            ];
+            // use for custom strings
+            $invalidLatinChars = apply_filters('de_de_latin_char_list', $invalidLatinChars);
+
+            $title = utf8_decode(strtr($title, $invalidLatinChars));
+        }
+
+        $title = str_replace($this->ecto(), $this->perma(), $title);
+        $title = str_replace($this->in(), $this->perma(), $title);
+        $title = str_replace($this->html(), $this->perma(), $title);
+        $title = remove_accents($title);
+        $title = sanitize_title_with_dashes($title);
+
+        return str_replace('.', '-', $title);
+    }
+
+    /**
+     * Replace filename.
+     *
+     * @param string $filename
+     *
+     * @return string
+     */
+    private function sanitizeFilename(string $filename): string
+    {
+        // Win Livewriter sends escaped strings.
+        $filename = html_entity_decode($filename, ENT_QUOTES, 'utf-8');
+        // Strip HTML and PHP tags.
+        $filename = strip_tags($filename);
+        // Preserve escaped octets.
+        $filename = preg_replace('|%([a-fA-F0-9])|', '---$1---', $filename);
+        // Remove percent signs that are not part of an octet.
+        $filename = str_replace('%', '', $filename);
+        // Restore octets.
+        $filename = preg_replace('|---([a-fA-F0-9])---|', '%$1', $filename);
+
+        $filename = remove_accents($filename);
+
+        if (seems_utf8($filename)) {
+            if (function_exists('mb_strtolower')) {
+                $filename = mb_strtolower($filename, 'UTF-8');
+            }
+            $filename = utf8_uri_encode($filename, 200);
+        }
+
+        $filename = strtolower($filename);
+        $filename = preg_replace('/&.,+?;/', '', $filename); // kill entities
+        $filename = preg_replace('/\s+/', '-', $filename);
+        $filename = preg_replace('|-+|', '-', $filename);
+
+        return trim($filename, '-');
+    }
+
     /**
      * Sanitize the name of a file.
      *
@@ -323,6 +387,21 @@ class de_DE
     {
         $file['name'] = $this->normalize($file['name']);
         return $file;
+    }
+
+
+    /**
+     * Replace umlaut chars from the xmlrpc surface.
+     *
+     * @param string $content
+     *
+     * @return string
+     */
+    public function sanitizeXmlrpContent(string $content): string
+    {
+        $content = str_replace($this->html(), $this->utf8(), $content);
+        $content = str_replace($this->feed(), $this->utf8(), $content);
+        return $content;
     }
 
     /**
@@ -633,43 +712,6 @@ class de_DE
     }
 
     /**
-     * Replace filename.
-     *
-     * @param string $filename
-     *
-     * @return string
-     */
-    private function sanitizeFilename(string $filename): string
-    {
-        // Win Livewriter sends escaped strings.
-        $filename = html_entity_decode($filename, ENT_QUOTES, 'utf-8');
-        // Strip HTML and PHP tags.
-        $filename = strip_tags($filename);
-        // Preserve escaped octets.
-        $filename = preg_replace('|%([a-fA-F0-9])|', '---$1---', $filename);
-        // Remove percent signs that are not part of an octet.
-        $filename = str_replace('%', '', $filename);
-        // Restore octets.
-        $filename = preg_replace('|---([a-fA-F0-9])---|', '%$1', $filename);
-
-        $filename = remove_accents($filename);
-
-        if (seems_utf8($filename)) {
-            if (function_exists('mb_strtolower')) {
-                $filename = mb_strtolower($filename, 'UTF-8');
-            }
-            $filename = utf8_uri_encode($filename, 200);
-        }
-
-        $filename = strtolower($filename);
-        $filename = preg_replace('/&.,+?;/', '', $filename); // kill entities
-        $filename = preg_replace('/\s+/', '-', $filename);
-        $filename = preg_replace('|-+|', '-', $filename);
-
-        return trim($filename, '-');
-    }
-
-    /**
      * Check that we are on the right area.
      *
      * @return bool
@@ -714,7 +756,7 @@ function bootstrap()
                 $hook,
                 static function () {
                     $message = __(
-                        'The plugin de_DE requires at least PHP version 7. <br />Please ask your server administrator to update your environment to PHP version 7.',
+                        'The plugin de_DE requires at least PHP version 7.<br/>Please ask your server administrator to update your environment to PHP version 7.',
                         'de-de'
                     );
 
@@ -724,7 +766,7 @@ function bootstrap()
                             'The plugin has been deactivated',
                             'de-de'
                         ),
-                        wp_kses($message, ['br' => true])
+                        wp_kses($message, ['br' => []])
                     );
 
                     deactivate_plugins(plugin_basename(__FILE__));
