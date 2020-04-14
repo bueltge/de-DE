@@ -65,7 +65,7 @@ class de_DE
      *
      * @var array
      */
-    private $xmlrpcAction;
+    private $xmlrpcActions;
 
     public function __construct()
     {
@@ -94,7 +94,7 @@ class de_DE
     public function onXmlrpc()
     {
         if (defined('XMLRPC_REQUEST') && XMLRPC_REQUEST) {
-            foreach ($this->xmlrpcAction as $action) {
+            foreach ($this->xmlrpcActions as $action) {
                 add_action($action, [$this, 'sanitizeXmlrpContent']);
             }
         }
@@ -117,8 +117,8 @@ class de_DE
      */
     public function xmlrpcActions(): array
     {
-        if ($this->xmlrpcAction) {
-            return $this->xmlrpcAction;
+        if ($this->xmlrpcActions) {
+            return $this->xmlrpcActions;
         }
         /**
          * Filter the hooks there we use on sanitize with the function sanitizeXmlrpContent().
@@ -127,7 +127,7 @@ class de_DE
          *
          * @param array
          */
-        $this->xmlrpcAction = (array)apply_filters(
+        $this->xmlrpcActions = (array)apply_filters(
             'de_DE_xmlrpc_hook_list',
             [
                 'the_title',
@@ -139,7 +139,7 @@ class de_DE
             ]
         );
 
-        return $this->xmlrpcAction;
+        return $this->xmlrpcActions;
     }
 
     /**
