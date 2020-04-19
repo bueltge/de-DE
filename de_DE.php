@@ -296,7 +296,6 @@ class de_DE
         return $this->umlautChars__in;
     }
 
-
     /**
      * Sanitizes the titles to get qualified german Permalinks with correct transliteration.
      *
@@ -388,7 +387,6 @@ class de_DE
         $file['name'] = $this->normalize($file['name']);
         return $file;
     }
-
 
     /**
      * Replace umlaut chars from the xmlrpc surface.
