@@ -6,7 +6,7 @@
  * It pre-select also the german spell checker at TinyMCE and set the Feed language key.
  *
  * @version  1.0.0-dev
- * @date     2020-04-13
+ * @date     2020-04-19
  * suggestion by Heiko Rabe (www.code-styling.de), Frank Bueltge (bueltge.de), Thomas Scholz (toscho.de)
  *
  * Plugin Name: de_DE
@@ -23,6 +23,9 @@
 
 declare(strict_types=1);
 
+// phpcs:disable PSR1.Files.SideEffects.FoundWithSymbols
+// phpcs:disable Squiz.Classes.ValidClassName.NotCamelCaps
+
 namespace de_DE;
 
 use Normalizer;
@@ -33,32 +36,32 @@ class de_DE
     /**
      * @var array
      */
-    private $umlautChars__in;
+    private $umlautCharsIn;
 
     /**
      * @var array
      */
-    private $umlautChars__ecto;
+    private $umlautCharsEcto;
 
     /**
      * @var array
      */
-    private $umlautChars__html;
+    private $umlautCharsHtml;
 
     /**
      * @var array
      */
-    private $umlautChars__feed;
+    private $umlautCharsFeed;
 
     /**
      * @var array
      */
-    private $umlautChars__utf8;
+    private $umlautCharsUtf8;
 
     /**
      * @var array
      */
-    private $umlautChars__perma;
+    private $umlautCharsPerma;
 
     /**
      * Store the hooks on there we should run the sanitizing for date from xmlprc surface.
@@ -149,15 +152,15 @@ class de_DE
      */
     public function html(): array
     {
-        if ($this->umlautChars__html) {
-            return $this->umlautChars__html;
+        if ($this->umlautCharsHtml) {
+            return $this->umlautCharsHtml;
         }
         /**
          * Change, enhance the chars in html format for filtering.
          *
          * @param array
          */
-        $this->umlautChars__html = (array)apply_filters(
+        $this->umlautCharsHtml = (array)apply_filters(
             'de_DE_html_list',
             [
                 '&Auml;',
@@ -171,7 +174,7 @@ class de_DE
             ]
         );
 
-        return $this->umlautChars__html;
+        return $this->umlautCharsHtml;
     }
 
     /**
@@ -179,10 +182,10 @@ class de_DE
      */
     public function feed(): array
     {
-        if ($this->umlautChars__feed) {
-            return $this->umlautChars__feed;
+        if ($this->umlautCharsFeed) {
+            return $this->umlautCharsFeed;
         }
-        $this->umlautChars__feed = (array)apply_filters(
+        $this->umlautCharsFeed = (array)apply_filters(
             'de_DE.feed',
             [
                 '&#196;',
@@ -196,7 +199,7 @@ class de_DE
             ]
         );
 
-        return $this->umlautChars__feed;
+        return $this->umlautCharsFeed;
     }
 
     /**
@@ -204,10 +207,10 @@ class de_DE
      */
     public function utf8(): array
     {
-        if ($this->umlautChars__utf8) {
-            return $this->umlautChars__utf8;
+        if ($this->umlautCharsUtf8) {
+            return $this->umlautCharsUtf8;
         }
-        $this->umlautChars__utf8 = (array)apply_filters(
+        $this->umlautCharsUtf8 = (array)apply_filters(
             'de_DE.utf8',
             [
                 utf8_encode('Ä'),
@@ -221,7 +224,7 @@ class de_DE
             ]
         );
 
-        return $this->umlautChars__utf8;
+        return $this->umlautCharsUtf8;
     }
 
     /**
@@ -229,10 +232,10 @@ class de_DE
      */
     public function ecto(): array
     {
-        if ($this->umlautChars__ecto) {
-            return $this->umlautChars__ecto;
+        if ($this->umlautCharsEcto) {
+            return $this->umlautCharsEcto;
         }
-        $this->umlautChars__ecto = (array)apply_filters(
+        $this->umlautCharsEcto = (array)apply_filters(
             'de_DE_ecto_list',
             [
                 'Ä',
@@ -246,15 +249,15 @@ class de_DE
             ]
         );
 
-        return $this->umlautChars__ecto;
+        return $this->umlautCharsEcto;
     }
 
     public function perma(): array
     {
-        if ($this->umlautChars__perma) {
-            return $this->umlautChars__perma;
+        if ($this->umlautCharsPerma) {
+            return $this->umlautCharsPerma;
         }
-        $this->umlautChars__perma = (array)apply_filters(
+        $this->umlautCharsPerma = (array)apply_filters(
             'de_DE_perma_list',
             [
                 'Ae',
@@ -268,18 +271,18 @@ class de_DE
             ]
         );
 
-        return $this->umlautChars__perma;
+        return $this->umlautCharsPerma;
     }
 
     /**
      * @return array
      */
-    public function in(): array
+    public function integer(): array
     {
-        if ($this->umlautChars__in) {
-            return $this->umlautChars__in;
+        if ($this->umlautCharsIn) {
+            return $this->umlautCharsIn;
         }
-        $this->umlautChars__in = (array)apply_filters(
+        $this->umlautCharsIn = (array)apply_filters(
             'de_DE_in_list',
             [
                 chr(196),
@@ -293,7 +296,7 @@ class de_DE
             ]
         );
 
-        return $this->umlautChars__in;
+        return $this->umlautCharsIn;
     }
 
     /**
@@ -330,7 +333,7 @@ class de_DE
         }
 
         $title = str_replace($this->ecto(), $this->perma(), $title);
-        $title = str_replace($this->in(), $this->perma(), $title);
+        $title = str_replace($this->integer(), $this->perma(), $title);
         $title = str_replace($this->html(), $this->perma(), $title);
         $title = remove_accents($title);
         $title = sanitize_title_with_dashes($title);
@@ -403,6 +406,22 @@ class de_DE
     }
 
     /**
+     * User Normalizer class if existent on the environment.
+     *
+     * @param string $string
+     *
+     * @return string
+     */
+    private function normalizer(string $string): string
+    {
+        if (class_exists('Normalizer')) {
+            return Normalizer::normalize($string, Normalizer::FORM_C);
+        }
+
+        return $this->toUtf8Chars($string);
+    }
+
+    /**
      * Normalize, filter umlaut of a string.
      *
      * @param string $filename
@@ -411,11 +430,7 @@ class de_DE
      */
     public function normalize(string $filename): string
     {
-        if (class_exists('Normalizer')) {
-            $filename = Normalizer::normalize($filename, Normalizer::FORM_C);
-        } else {
-            $filename = $this->toUtf8Chars($filename);
-        }
+        $filename = $this->normalizer($filename);
 
         if (seems_utf8($filename)) {
             $invalidLatinChars = [
@@ -431,12 +446,13 @@ class de_DE
         }
 
         $filename = str_replace($this->ecto(), $this->perma(), $filename);
-        $filename = str_replace($this->in(), $this->perma(), $filename);
+        $filename = str_replace($this->integer(), $this->perma(), $filename);
         $filename = str_replace($this->html(), $this->perma(), $filename);
 
         return $this->sanitizeFilename($filename);
     }
 
+    // phpcs:disable Inpsyde.CodeQuality.FunctionLength.TooLong
     /**
      * Simple and hard alternate for the Normalizer class.
      *
@@ -708,6 +724,7 @@ class de_DE
 
         return str_replace($search, $replace, $string);
     }
+    // phpcs:enable
 
     /**
      * Check that we are on the right area.
@@ -724,6 +741,7 @@ class de_DE
     }
 }
 
+// phpcs:disable
 /**
  * Bootstrap to use the class in different WordPress scenarios.
  */
