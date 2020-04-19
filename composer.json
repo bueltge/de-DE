@@ -1,12 +1,12 @@
 {
-    "name": "bueltge/de_DE.php",
+    "name": "bueltge/de-de",
     "type": "wordpress-muplugin",
     "description": "WordPress-Plugin that add special german permalink sanitize and replaces characters.",
     "keywords": [
         "wordpress",
         "plugin"
     ],
-    "homepage": "https://github.com/bueltge/de_DE.php",
+    "homepage": "https://github.com/bueltge/de-DE",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -18,7 +18,7 @@
     ],
     "require": {
         "php": ">=7.0.0",
-        "composer/installers": "^1.2",
+        "composer/installers": "^1.3",
         "ext-intl": "*",
         "ext-mbstring": "*"
     },
@@ -35,8 +35,5 @@
     "scripts": {
         "cs": "./vendor/bin/phpcs",
         "ps": "./vendor/bin/psalm"
-    },
-    "extra": {
-        "installer-disable": true
     }
 }

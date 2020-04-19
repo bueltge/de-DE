@@ -31,7 +31,7 @@ Diese Sprach-_DropIn_ ersetzt diverse Zeichen durch entprechende Strings in den 
 = Hinweise =
 
  * Wenn das Plugin [Germanix](https://github.com/toscho/Germanix-WordPress-Plugin) aktiv ist, dann wirkt dieses Plugin/ Dropin `de_DE.php` nicht.
- * Support, Fehler, Ergänzen bitte via [GitHub](https://github.com/bueltge/de_DE.php/)
+ * Support, Fehler, Ergänzen bitte via [GitHub](https://github.com/bueltge/de-DE/)
  
 == Installation ==
 

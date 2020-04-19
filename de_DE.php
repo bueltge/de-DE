@@ -10,7 +10,7 @@
  * suggestion by Heiko Rabe (www.code-styling.de), Frank Bueltge (bueltge.de), Thomas Scholz (toscho.de)
  *
  * Plugin Name: de_DE
- * Plugin URI:  https://github.com/bueltge/de_DE.php
+ * Plugin URI:  https://github.com/bueltge/de-DE
  * Description: Add special german permalink sanitize and replaces characters with appropriate transliterations uploads
  *     will be only needed at admin center and xmlrpc calls, pre-select also the german spell checker at TinyMCE and
  *     set the rss language key.
