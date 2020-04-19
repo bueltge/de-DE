@@ -5,7 +5,7 @@ Tags: german, ascii, permalink, umlaut, upload
 Requires at least: 3.5
 Tested up to: 5.4
 Requires PHP: 5.6
-Stable tag: 0.7.15
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,10 +32,13 @@ Diese Sprach-_DropIn_ ersetzt diverse Zeichen durch entprechende Strings in den 
 
  * Wenn das Plugin [Germanix](https://github.com/toscho/Germanix-WordPress-Plugin) aktiv ist, dann wirkt dieses Plugin/ Dropin `de_DE.php` nicht.
  * Support, Fehler, Ergänzen bitte via [GitHub](https://github.com/bueltge/de-DE/)
- 
+
+= Support und Unterstützung =
+Das Plugin liegt auf [GitHub](https://wordpress.org/plugins/de_de/) und jede Hilfe ist gern gesehen.
+
 == Installation ==
 
- * PHP 5.2 (aktiv getestet unter php 7.1)
+ * PHP 5.6 (aktiv getestet unter php 7.2)
  * WordPress 3.5, (aktiv getestet in der letzen stabilen Version)
  * Optional: [Normalizer class](http://php.net/manual/de/class.normalizer.php)
 
@@ -50,6 +53,10 @@ Diese Sprach-_DropIn_ ersetzt diverse Zeichen durch entprechende Strings in den 
  * Das Plugin im Administrationsbereich --> Plugins aktivieren
  
 == Changelog ==
+= 1.0.0 (2020-04-19) =
+* Supports Gutenberg Editor, REST API
+* Refactoring Code to use it also via REST API - Leave the one-file solution to use it easy as Dropin.
+
 = 0.7.15 (2018-11-13) =
 * Remove setting default spellchecker, because the spellchecker of the editor is since version 3.5 no longer available.
 

@@ -5,7 +5,7 @@
  *  with appropriate transliterations uploads.
  * It pre-select also the german spell checker at TinyMCE and set the Feed language key.
  *
- * @version  1.0.0-dev
+ * @version  1.0.0
  * @date     2020-04-19
  * suggestion by Heiko Rabe (www.code-styling.de), Frank Bueltge (bueltge.de), Thomas Scholz (toscho.de)
  *
@@ -15,7 +15,7 @@
  *     will be only needed at admin center and xmlrpc calls, pre-select also the german spell checker at TinyMCE and
  *     set the rss language key.
  * Author:      Frank Bültge
- * Version:     1.0.0-dev
+ * Version:     1.0.0
  * License:     GPLv2+
  *
  * Copyright 2009 - 2020, Frank Bültge ( frank@bueltge.de )
@@ -97,7 +97,7 @@ class de_DE
     public function onXmlrpc()
     {
         if (defined('XMLRPC_REQUEST') && XMLRPC_REQUEST) {
-            foreach ($this->xmlrpcActions as $action) {
+            foreach ($this->xmlrpcActions() as $action) {
                 add_action($action, [$this, 'sanitizeXmlrpContent']);
             }
         }

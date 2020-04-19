@@ -14,7 +14,7 @@ transliterations uploads will be only needed at admin center and xmlrpc calls.
 
  * Ersatz von Umlauten und Sonderzeichen um saubere Permalinks zu erzeugen
    * Beispiel: _Das häßliche Entlein kostet 1 €_ wird im Permalink zu _das haessliches-entlein-kostet-1-eur_
- * Dateinamen ersetzen: Sonderzeichen, Leerzeichen, Umlaute
+   * Hinweis: Bei Verwendung des Gutenberg Editors klappt dies nicht, da via Ajax der Permalink aus dem Titel generiert wird.
    * Beispiel: _Häßliches Entlein.png_ wird zu _haessliches-entlein.png_
  * Setzt den Sprachwert des Feed auf `de` (dafür hat WordPress keine sichtbare Option)
 
@@ -22,7 +22,7 @@ transliterations uploads will be only needed at admin center and xmlrpc calls.
  
  * Wenn das Plugin [Germanix](https://github.com/thefuxia/Germanix-WordPress-Plugin) aktiv ist, 
    dann wirkt dieses Plugin _de_DE.php_ nicht.
- 
+ * Seit Version 1.0.0 wird Gutenberg unterstützt, beispielsweise beim UPload von Media-Dateien via Drag&Drop. Allerdings sind nicht ausreichend Hooks vorhanden, so dass der Titel des Bildes ebenso angepasst wird. Wird also der Titel ins auberer Form benötigt, so muss dies manuel angepasst werden. Der Dateiname wird aber sauber gefiltert. 
 ## Einsatz als Dropin
 
  * Upload der Datei `de_DE.php` in Sprachordner, üblicherweise `wp-content/languages`
