@@ -1,21 +1,21 @@
 <?php # -*- coding: utf-8 -*-
 
 /**
- * WordPress-Dropin or -Plugin that add special german permalink sanitize and replaces characters
+ * WordPress-Dropin or -Plugin that adds special german permalink sanitize and replaces characters
  *  with appropriate transliterations uploads.
- * It pre-select also the german spell checker at TinyMCE and set the Feed language key.
+ * It pre-selects also the German spell checker at TinyMCE and sets the Feed language key.
  *
- * @version  1.0.0
+ * @version  1.0.1
  * @date     2020-04-19
  * suggestion by Heiko Rabe (www.code-styling.de), Frank Bueltge (bueltge.de), Thomas Scholz (toscho.de)
  *
  * Plugin Name: de_DE
  * Plugin URI:  https://github.com/bueltge/de-DE
- * Description: Add special german permalink sanitize and replaces characters with appropriate transliterations uploads
- *     will be only needed at admin center and xmlrpc calls, pre-select also the german spell checker at TinyMCE and
- *     set the rss language key.
+ * Description: Add special German Permalink sanitize and replace characters with appropriate transliterations uploads
+ *     will be only needed at admin center and XMLRPC calls; pre-select also the German spell checker at TinyMCE and
+ *     set the RSS language key.
  * Author:      Frank Bültge
- * Version:     1.0.0
+ * Version:     1.0.1
  * License:     GPLv2+
  *
  * Copyright 2009 - 2020, Frank Bültge ( frank@bueltge.de )
@@ -331,10 +331,10 @@ class de_DE
 
             // PHP 8.2: utf8_decode functions deprecated.
             // @see: https://php.watch/versions/8.2/utf8_encode-utf8_decode-deprecated
-            if (function_exists('utf8_decode')) {
-                $title = utf8_decode(strtr($title, $invalidLatinChars));
+            if (version_compare(phpversion(), '8.2.0') >= 0) {
+				$title = mb_convert_encoding(strtr($title, $invalidLatinChars), 'UTF-8', 'ISO-8859-1');
             } else {
-                mb_convert_encoding(strtr($title, $invalidLatinChars), 'UTF-8', 'ISO-8859-1');
+                $title = utf8_decode(strtr($title, $invalidLatinChars));
             }
         }
 
