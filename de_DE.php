@@ -329,7 +329,13 @@ class de_DE
             // use for custom strings
             $invalidLatinChars = apply_filters('de_de_latin_char_list', $invalidLatinChars);
 
-            $title = utf8_decode(strtr($title, $invalidLatinChars));
+            // PHP 8.2: utf8_decode functions deprecated.
+            // @see: https://php.watch/versions/8.2/utf8_encode-utf8_decode-deprecated
+            if (function_exists('utf8_decode')) {
+                $title = utf8_decode(strtr($title, $invalidLatinChars));
+            } else {
+                mb_convert_encoding(strtr($title, $invalidLatinChars), 'UTF-8', 'ISO-8859-1');
+            }
         }
 
         $title = str_replace($this->ecto(), $this->perma(), $title);
