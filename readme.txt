@@ -3,7 +3,7 @@ Contributors: Bueltge
 Donate link: https://www.paypal.me/FrankBueltge
 Tags: german, ascii, permalink, umlaut, upload
 Requires at least: 3.5
-Tested up to: 5.4
+Tested up to: 6.5
 Requires PHP: 5.6
 Stable tag: 1.0.1
 License: GPLv2 or later

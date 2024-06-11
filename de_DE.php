@@ -6,7 +6,7 @@
  * It pre-selects also the German spell checker at TinyMCE and sets the Feed language key.
  *
  * @version  1.0.1
- * @date     2020-04-19
+ * @date     2024-06-11
  * suggestion by Heiko Rabe (www.code-styling.de), Frank Bueltge (bueltge.de), Thomas Scholz (toscho.de)
  *
  * Plugin Name: de_DE
@@ -18,7 +18,7 @@
  * Version:     1.0.1
  * License:     GPLv2+
  *
- * Copyright 2009 - 2020, Frank Bültge ( frank@bueltge.de )
+ * Copyright 2009 - 2024, Frank Bültge ( frank@bueltge.de )
  */
 
 declare(strict_types=1);
