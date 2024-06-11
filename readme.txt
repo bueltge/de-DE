@@ -9,12 +9,12 @@ Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Replace Non-ASCII characters for installs, that set the german language as primary language.
+Replace non-ASCII characters for installs that set the German language as a primary language.
 
 == Description ==
-The solution is usally interested in installations whose set the language to de_DE, German. This Plugin, also usable as Drop In, replaces non-ASCII strings, especially german umlauts, with a alternate in permalinks, uploaded files. Also add it the german language key to the feed.
+The solution is usually interested in installations that set the language to de_DE, German. This Plugin, also usable as a drop-in, replaces non-ASCII strings, especially German umlauts, with an alternate in permalinks and uploaded files. Also, add the German language key to the feed.
 
-*The follow hints are only available in German language.*
+*The following hints are only available in the German language.*
 
 = Beschreibung =
 
@@ -53,15 +53,15 @@ Das Plugin liegt auf [GitHub](https://wordpress.org/plugins/de_de/) und jede Hil
  * Das Plugin im Administrationsbereich --> Plugins aktivieren
  
 == Changelog ==
-= 1.0.1 (2020-04-19) =
+= 1.0.1 (2024-06-11) =
 * Fix deprecated topic for PHP >=8.2
 
 = 1.0.0 (2020-04-19) =
 * Supports Gutenberg Editor, REST API
-* Refactoring Code to use it also via REST API - Leave the one-file solution to use it easy as Dropin.
+* Refactoring Code to use it also via REST API - Leave the one-file solution to use it easily as Dropin.
 
 = 0.7.15 (2018-11-13) =
-* Remove setting default spellchecker, because the spellchecker of the editor is since version 3.5 no longer available.
+* Remove setting the default spellchecker because the editor spellchecker has been unavailable since version 3.5.
 
 = 0.7.14 (2017-04-07) =
-* First release on wordpress.org, before only public on github
+* First release on wordpress.org, before only public on GitHub
