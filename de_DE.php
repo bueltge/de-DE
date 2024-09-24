@@ -210,9 +210,22 @@ class de_DE
         if ($this->umlautCharsUtf8) {
             return $this->umlautCharsUtf8;
         }
-        $this->umlautCharsUtf8 = (array)apply_filters(
-            'de_DE.utf8',
-            [
+
+        // PHP 8.2: utf8_decode functions deprecated.
+        // @see: https://php.watch/versions/8.2/utf8_encode-utf8_decode-deprecated
+        if (version_compare(phpversion(), '8.2.0') >= 0) {
+            $defaults = [
+                mb_convert_encoding('Ä', 'UTF-8', 'ISO-8859-1'),
+                mb_convert_encoding('ä', 'UTF-8', 'ISO-8859-1'),
+                mb_convert_encoding('Ö', 'UTF-8', 'ISO-8859-1'),
+                mb_convert_encoding('ö', 'UTF-8', 'ISO-8859-1'),
+                mb_convert_encoding('Ü', 'UTF-8', 'ISO-8859-1'),
+                mb_convert_encoding('ü', 'UTF-8', 'ISO-8859-1'),
+                mb_convert_encoding('ß', 'UTF-8', 'ISO-8859-1'),
+                mb_convert_encoding('€', 'UTF-8', 'ISO-8859-1'),
+            ];
+        } else {
+            $defaults = [
                 utf8_encode('Ä'),
                 utf8_encode('ä'),
                 utf8_encode('Ö'),
@@ -221,7 +234,12 @@ class de_DE
                 utf8_encode('ü'),
                 utf8_encode('ß'),
                 utf8_encode('€'),
-            ]
+            ];
+        }
+
+        $this->umlautCharsUtf8 = (array)apply_filters(
+            'de_DE.utf8',
+            $defaults
         );
 
         return $this->umlautCharsUtf8;
@@ -330,11 +348,12 @@ class de_DE
             $invalidLatinChars = apply_filters('de_de_latin_char_list', $invalidLatinChars);
 
             // PHP 8.2: utf8_decode functions deprecated.
+            // Will be replaced by: mb_convert_encoding( $utf_string, 'ISO-8859-1', 'UTF-8');
             // @see: https://php.watch/versions/8.2/utf8_encode-utf8_decode-deprecated
             if (version_compare(phpversion(), '8.2.0') >= 0) {
-				$title = mb_convert_encoding(strtr($title, $invalidLatinChars), 'UTF-8', 'ISO-8859-1');
+                $title = mb_convert_encoding(strtr($title, $invalidLatinChars), 'ISO-8859-1', 'UTF-8'); // Returns ISO-8859-1
             } else {
-                $title = utf8_decode(strtr($title, $invalidLatinChars));
+                $title = utf8_decode(strtr($title, $invalidLatinChars)); // Returns ISO-8859-1
             }
         }
 
@@ -448,7 +467,14 @@ class de_DE
                 chr(197).chr(190) => 'z',
                 chr(226).chr(130).chr(172) => 'EUR',
             ];
-            $filename = utf8_decode(strtr($filename, $invalidLatinChars));
+
+            // PHP 8.2: utf8_decode functions deprecated.
+            // @see: https://php.watch/versions/8.2/utf8_encode-utf8_decode-deprecated
+            if (version_compare(phpversion(), '8.2.0') >= 0) {
+                $filename = mb_convert_encoding(strtr($filename, $invalidLatinChars), 'ISO-8859-1', 'UTF-8' );
+            } else {
+                $filename = utf8_decode(strtr($filename, $invalidLatinChars));
+            }
         }
 
         $filename = str_replace($this->ecto(), $this->perma(), $filename);
