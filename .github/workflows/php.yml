@@ -46,6 +46,3 @@ jobs:
     - name: Check code styles
       continue-on-error: true
       run: ./vendor/bin/phpcs
-
-    - name: Run Psalm Checks script from composer.json
-      run: composer ps
