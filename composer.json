@@ -41,11 +41,6 @@
 	"prefer-stable": true,
     "scripts": {
         "cs": "./vendor/bin/phpcs",
-        "csf": "./vendor/bin/phpcbf",
-        "ps": "./vendor/bin/psalm",
-        "qa": [
-			"@cs",
-			"@ps"
-		]
+        "csf": "./vendor/bin/phpcbf"
     }
 }
