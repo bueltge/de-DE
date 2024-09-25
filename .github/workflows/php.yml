@@ -47,5 +47,5 @@ jobs:
       continue-on-error: true
       run: ./vendor/bin/phpcs
 
-    - name: Run QA Scripts from composer.json
-      run: composer qa
+    - name: Run Psalm Checks script from composer.json
+      run: composer ps
