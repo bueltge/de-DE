@@ -2,35 +2,30 @@
 
 ## Beschreibung (Deutsch)
 
-Diese Sprach-_DropIn_ ersetzt diverse Zeichen durch entprechende Strings in den Permalinks 
-und den Namen hochgeladener Dateien. Im weiteren wird der Sprachschlüssel der Feeds gesetzt.
+Dieses Sprach-Drop-in ersetzt diverse Zeichen durch entsprechende Zeichenfolgen in den Permalinks und den Dateinamen hochgeladener Dateien. Des Weiteren wird der Sprachschlüssel der Feeds gesetzt.
 
 ## Description (English)
 
-This DropIn add special german permalink sanitize and replaces characters with appropriate 
-transliterations uploads will be only needed at admin center and xmlrpc calls.
+This drop-in adds special German permalink sanitization and replaces characters with appropriate transliterations. The transliteration of uploads is only active in the admin center and for XML-RPC calls.
 
 ### Lösungen
 
- * Ersatz von Umlauten und Sonderzeichen um saubere Permalinks zu erzeugen
-   * Beispiel: _Das häßliche Entlein kostet 1 €_ wird im Permalink zu _das haessliches-entlein-kostet-1-eur_
-   * Hinweis: Bei Verwendung des Gutenberg Editors klappt dies nicht, da via Ajax der Permalink aus dem Titel generiert wird.
-   * Beispiel: _Häßliches Entlein.png_ wird zu _haessliches-entlein.png_
- * Setzt den Sprachwert des Feed auf `de` (dafür hat WordPress keine sichtbare Option)
+*   Ersetzt Umlaute und Sonderzeichen, um saubere Permalinks zu erzeugen.
+    *   Beispiel: Aus „Das hässliche Entlein kostet 1 €“ wird im Permalink „das-haessliche-entlein-kostet-1-eur“.
+    *   Hinweis: Bei Verwendung des Gutenberg-Editors funktioniert dies nicht, da der Permalink via Ajax aus dem Titel generiert wird.
+    *   Beispiel: Aus „Hässliches Entlein.png“ wird „haessliches-entlein.png“.
+*   Setzt den Sprachwert des Feeds auf `de` (WordPress bietet hierfür keine sichtbare Option).
 
 ### Hinweise
  
- * Wenn das Plugin [Germanix](https://github.com/thefuxia/Germanix-WordPress-Plugin) aktiv ist, 
-   dann wirkt dieses Plugin _de_DE.php_ nicht.
- * Seit Version 1.0.0 wird Gutenberg unterstützt, beispielsweise beim UPload von Media-Dateien via Drag&Drop. Allerdings sind nicht ausreichend Hooks vorhanden, so dass der Titel des Bildes ebenso angepasst wird. Wird also der Titel ins auberer Form benötigt, so muss dies manuel angepasst werden. Der Dateiname wird aber sauber gefiltert. 
-## Einsatz als Dropin
+ * Wenn das Plugin [Germanix](https://github.com/thefuxia/Germanix-WordPress-Plugin) aktiv ist, wirkt dieses Plugin (`de_DE.php`) nicht.
+ * Seit Version 1.0.0 wird Gutenberg unterstützt, beispielsweise beim Upload von Mediendateien via Drag and Drop. Allerdings sind nicht ausreichend Hooks vorhanden, sodass der Bildtitel ebenfalls durch Gutenberg angepasst wird (und dieses Plugin dies nicht immer beeinflussen kann). Benötigt man den Titel also in einer sauberen Form, muss dieser manuell angepasst werden. Der Dateiname wird hingegen zuverlässig gefiltert.
+## Einsatz als Drop-in
 
- * Upload der Datei `de_DE.php` in Sprachordner, üblicherweise `wp-content/languages`
- * Das Dropin ist automatisch aktiv, sobald der Sprachschlüssel (Konstante: `WPLANG`) in der 
-   `wp-config.php`auf `de_DE` gesetzt ist oder (seit WordPress Version 4.0) die Sprache Deutsch in den Einstellungen gesetzt ist.
+*   Laden Sie die Datei `de_DE.php` in den Sprachordner Ihrer WordPress-Installation hoch (üblicherweise `wp-content/languages`).
+*   Das Drop-in wird automatisch aktiv, sobald entweder der Sprachschlüssel (Konstante `WPLANG`) in der `wp-config.php` auf `de_DE` gesetzt ist oder (seit WordPress Version 4.0) in den WordPress-Einstellungen „Deutsch“ als Sprache ausgewählt wurde.
 
 ## Einsatz als Plugin
 
- * Upload des Ordners oder nur der Datei `de_DE.php` in den Plugin-Ordner der Installation
-   , im Standard ist das `wp-content/plugins`
- * Das Plugin im Administrationsbereich --> Plugins aktivieren
+*   Laden Sie entweder den Ordner (wenn Sie das gesamte Repository heruntergeladen haben) oder nur die Datei `de_DE.php` in den Plugin-Ordner Ihrer WordPress-Installation hoch (standardmäßig `wp-content/plugins`).
+*   Aktivieren Sie das Plugin im WordPress-Administrationsbereich unter „Plugins“.
