@@ -53,7 +53,7 @@ jobs:
       run: ./vendor/bin/phpcbf
       continue-on-error: true
         
-    - name: Commit Changes
-      if: ${{ matrix.php-version == '8.4' }}
+    - name: Commit PHPCBF Changes
+      if: ${{ matrix.php-versions == '8.4' }}
       uses: stefanzweifel/git-auto-commit-action@v4
       
