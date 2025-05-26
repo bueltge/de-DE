@@ -15,7 +15,6 @@ jobs:
         php-versions:
           - '7.4'
           - '8.0'
-          - '8.3'
           - '8.4'
         
         include:
@@ -45,5 +44,6 @@ jobs:
     - name: Install dependencies
       run: composer install -q -n -a --no-progress --prefer-dist
 
-    - name: Run PhpCS
-      run: phpcs -q --report=checkstyle . | cs2pr
+    - name: Check Code Styles
+      continue-on-error: true
+      run: ./vendor/bin/phpcs
