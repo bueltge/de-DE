@@ -73,9 +73,9 @@ class de_DE {
 	public function __construct() {
 	}
 
-    /**
-     * Run if the applications loads the plugins.
-     */
+	/**
+	 * Run if the applications loads the plugins.
+	 */
 	public function onLoad() {
 		if ( ! $this->excludes() ) {
 			return;
