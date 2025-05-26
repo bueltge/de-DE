@@ -16,9 +16,10 @@ jobs:
           - '7.4'
           - '8.0'
           - '8.3'
+          - '8.4'
         
         include:
-          - php-version: '8.4'
+          - php-version: '8.5'
             experimental: true
             
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -46,8 +47,3 @@ jobs:
 
     - name: Run PhpCS
       run: phpcs -q --report=checkstyle src | cs2pr
-
-    - name: Check code styles
-      uses: chekay/action-phpcs@v1
-      with:
-        phpcs_bin: 'vendor/bin/phpcs'
