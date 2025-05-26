@@ -49,7 +49,7 @@ jobs:
       run: ./vendor/bin/phpcs
 
     - name: Run PHPCBF
-      if: ${{ matrix.php-version == '8.4' }}
+      if: ${{ matrix.php-versions == '8.4' }}
       run: ./vendor/bin/phpcbf
       continue-on-error: true
         
