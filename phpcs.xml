@@ -12,7 +12,7 @@
     <!-- Use only php files. -->
     <arg name="extensions" value="php"/>
 
-    <file>.</file>
+    <file>de_DE.php</file>
 
     <!-- https://github.com/PHPCompatibility/PHPCompatibility#sniffing-your-code-for-compatibility-with-specific-php-versions -->
     <config name="testVersion" value="7.0-"/>
