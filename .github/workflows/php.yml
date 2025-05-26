@@ -46,4 +46,4 @@ jobs:
       run: composer install -q -n -a --no-progress --prefer-dist
 
     - name: Run PhpCS
-      run: phpcs -q --report=checkstyle src | cs2pr
+      run: phpcs -q --report=checkstyle . | cs2pr
