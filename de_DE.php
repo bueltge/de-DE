@@ -250,7 +250,7 @@ class de_DE {
 	public function isUtf8( $str ): bool {
 		// Dependend on WP version >= 6.9 we use wp_is_valid_utf8() else seems_utf8().
 		// @see https://developer.wordpress.org/reference/functions/wp_check_invalid_utf8/
-		if( function_exists( 'wp_is_valid_utf8' ) ) {
+		if ( function_exists( 'wp_is_valid_utf8' ) ) {
 			return wp_is_valid_utf8( $str );
 		}
 
