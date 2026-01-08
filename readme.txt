@@ -8,6 +8,8 @@ Requires PHP: 5.6
 Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
+$option = sanitize_text_field($_POST['option']);
+
 
 Replace non-ASCII characters for installs that set the German language as a primary language.
 
