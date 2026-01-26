@@ -5,8 +5,8 @@
  *  with appropriate transliterations uploads.
  * It pre-selects also the German spell checker at TinyMCE and sets the Feed language key.
  *
- * @version  1.0.2
- * @date     2024-09-24
+ * @version  1.0.3
+ * @date     2026-01-26
  * suggestion by Heiko Rabe (www.code-styling.de), Frank Bueltge (bueltge.de), Thomas Scholz (toscho.de)
  *
  * Plugin Name: de_DE
@@ -15,7 +15,7 @@
  *     will be only needed at admin center and XMLRPC calls; pre-select also the German spell checker at TinyMCE and
  *     set the RSS language key.
  * Author:      Frank Bültge
- * Version:     1.0.2
+ * Version:     1.0.3
  * License:     GPLv2+
  *
  * Copyright 2009 - 2024, Frank Bültge ( frank@bueltge.de )
