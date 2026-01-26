@@ -239,6 +239,25 @@ class de_DE {
 		return $this->umlautCharsUtf8;
 	}
 
+
+	/**
+	 * Determine if a string is utf8 encoded.
+	 *
+	 * @param string $str
+	 *
+	 * @return bool
+	 */
+	public function isUtf8( $str ): bool {
+		// Dependend on WP version >= 6.9 we use wp_is_valid_utf8() else seems_utf8().
+		// @see https://developer.wordpress.org/reference/functions/wp_check_invalid_utf8/
+		if ( function_exists( 'wp_is_valid_utf8' ) ) {
+			return wp_is_valid_utf8( $str );
+		}
+
+		return seems_utf8( $str );
+	}
+
+
 	/**
 	 * @return array
 	 */
@@ -321,7 +340,7 @@ class de_DE {
 			$title = $rawTitle;
 		}
 
-		if ( seems_utf8( $title ) ) {
+		if ( $this->isUtf8( $title ) ) {
 			$invalidLatinChars = array(
 				chr( 197 ) . chr( 146 )              => 'OE',
 				chr( 197 ) . chr( 147 )              => 'oe',
@@ -377,7 +396,7 @@ class de_DE {
 
 		$filename = remove_accents( $filename );
 
-		if ( seems_utf8( $filename ) ) {
+		if ( $this->isUtf8( $filename ) ) {
 			if ( function_exists( 'mb_strtolower' ) ) {
 				$filename = mb_strtolower( $filename, 'UTF-8' );
 			}
@@ -442,7 +461,7 @@ class de_DE {
 	public function normalize( string $filename ): string {
 		$filename = $this->normalizer( $filename );
 
-		if ( seems_utf8( $filename ) ) {
+		if ( $this->isUtf8( $filename ) ) {
 			$invalidLatinChars = array(
 				chr( 197 ) . chr( 146 )              => 'OE',
 				chr( 197 ) . chr( 147 )              => 'oe',
