@@ -35,7 +35,7 @@ Diese Sprach-_DropIn_ ersetzt diverse Zeichen durch entprechende Strings in den 
  * Support, Fehler, Ergänzen bitte via [GitHub](https://github.com/bueltge/de-DE/)
 
 = Support und Unterstützung =
-Das Plugin liegt auf [GitHub](https://wordpress.org/plugins/de_de/) und jede Hilfe ist gern gesehen.
+Das Plugin liegt auf [GitHub](https://github.com/bueltge/de-DE) und jede Hilfe ist gern gesehen.
 
 == Installation ==
 
