@@ -3,8 +3,8 @@ Contributors: Bueltge
 Donate link: https://www.paypal.me/FrankBueltge
 Tags: german, ascii, permalink, umlaut, upload
 Requires at least: 3.5
-Tested up to: 6.9
-Requires PHP: 5.6
+Tested up to: 7.2
+Requires PHP: 8.2
 Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -39,7 +39,7 @@ Das Plugin liegt auf [GitHub](https://github.com/bueltge/de-DE) und jede Hilfe i
 
 == Installation ==
 
- * PHP 5.6 (aktiv getestet unter php 8.3)
+ * PHP 8.2
  * WordPress 3.5, (aktiv getestet in der letzen stabilen Version)
  * Optional: [Normalizer class](http://php.net/manual/de/class.normalizer.php)
 
