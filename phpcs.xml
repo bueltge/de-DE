@@ -15,7 +15,7 @@
     <file>de_DE.php</file>
 
     <!-- https://github.com/PHPCompatibility/PHPCompatibility#sniffing-your-code-for-compatibility-with-specific-php-versions -->
-    <config name="testVersion" value="7.0-"/>
+    <config name="testVersion" value="8.2-"/>
 
 	<!-- How to scan -->
 	<arg value="sp"/> <!-- Show sniff and progress -->
